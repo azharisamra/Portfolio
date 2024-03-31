@@ -4,7 +4,7 @@
     "organisation": "Baker Hughes",
     "startDate": "March, 2023",
     "endDate": "Feb, 2024",
-    "experiences": ["Worked on Google Maps", "Reduced load times by 50%"],
+    "experiences": ["Worked on live projects", "Wrote unit testcases to increase code coverage by 23%", "Designed new dashboard on kibana"],
     "imageSrc": "history/Baker Hughes.png"
   },
   {
@@ -12,7 +12,7 @@
     "organisation": "Adguru Online",
     "startDate": "July, 2022",
     "endDate": "Sep, 2022",
-    "experiences": ["Worked on Windows 11", "Designed the control panel"],
+    "experiences": ["Developed and managed the company website, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
     "imageSrc": "history/AdguruOnlin.png"
   }
 ]

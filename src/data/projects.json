@@ -2,7 +2,7 @@
   {
     "title": "Housing Society Manegment",
     "imageSrc": "projects/HSM.png",
-    "description": "This is a project made to learn the latest languages by building an app.",
+    "description": "Successfully developed the website from scratch using HTML, CSS, JavaScript, PHP and Bootstrap. Hosted website on PhpMyAdmin and connected it with MySQL",
     "skills": ["HTML", "CSS", "JavaScript"],
     "demo": "https://www.example.com",
     "source": "https://github.com/azharisamra/Housing-Society-Management"
@@ -10,7 +10,7 @@
   {
     "title": "Airline Reservation System",
     "imageSrc": "projects/ARS.png",
-    "description": "This is a project made to learn the latest languages by building an app.",
+    "description": "Designed and developed an online Airlines Ticket Reservation System using Java Swing and stored the data in MySQL to be used by the front end.",
     "skills": ["Java Swing", "MySQL", "Visual Studio"],
     "demo": "https://www.example.com",
     "source": "https://github.com/azharisamra/Airline-reservation-system"
@@ -18,7 +18,7 @@
   {
     "title": "Online Bakery Store",
     "imageSrc": "projects/OBS.png",
-    "description": "This is a project made to learn the latest languages by building an app.",
+    "description": "Developed Self Online Ordering system for the customers using Android studio and MySQL for Data Storage. This application assisted the customers in customizing the cake as well as making the payment online along with the order tracking system. ",
     "skills": ["Java", "Android Studio", "MySQL"],
     "demo": "https://www.example.com",
     "source": "https://drive.google.com/file/d/1bZ8Aah0DPg-mWFEEHyNpsRQGdLwHhtwY/view?usp=sharing"
