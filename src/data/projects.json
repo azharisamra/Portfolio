@@ -1,26 +1,26 @@
 [
   {
-    "title": "Project A",
-    "imageSrc": "projects/project.png",
+    "title": "Housing Society Manegment",
+    "imageSrc": "projects/HSM.png",
     "description": "This is a project made to learn the latest languages by building an app.",
-    "skills": ["React", "Express", "Node"],
+    "skills": ["HTML", "CSS", "JavaScript"],
     "demo": "https://www.example.com",
-    "source": "https://www.github.com"
+    "source": "https://github.com/azharisamra/Housing-Society-Management"
   },
   {
-    "title": "Project B",
-    "imageSrc": "projects/project.png",
+    "title": "Airline Reservation System",
+    "imageSrc": "projects/ARS.png",
     "description": "This is a project made to learn the latest languages by building an app.",
-    "skills": ["React", "Express", "Node", "Sass"],
+    "skills": ["Java Swing", "MySQL", "Visual Studio"],
     "demo": "https://www.example.com",
-    "source": "https://www.github.com"
+    "source": "https://github.com/azharisamra/Airline-reservation-system"
   },
   {
-    "title": "Project C",
-    "imageSrc": "projects/project.png",
+    "title": "Online Bakery Store",
+    "imageSrc": "projects/OBS.png",
     "description": "This is a project made to learn the latest languages by building an app.",
-    "skills": ["React", "Express", "Node"],
+    "skills": ["Java", "Android Studio", "MySQL"],
     "demo": "https://www.example.com",
-    "source": "https://www.github.com"
+    "source": "https://drive.google.com/file/d/1bZ8Aah0DPg-mWFEEHyNpsRQGdLwHhtwY/view?usp=sharing"
   }
 ]

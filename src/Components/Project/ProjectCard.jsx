@@ -3,7 +3,7 @@ import styles from "./ProjectCard.module.css";
 
 export const ProjectCard = ({
   // eslint-disable-next-line react/prop-types
-  project: { title, imageSrc, description, skills, demo, source },
+  project: { title, imageSrc, description, skills, source },
 }) => {
   return (
     <div className={styles.container}>
@@ -27,7 +27,7 @@ export const ProjectCard = ({
         }
       </ul>
       <div className={styles.links}>
-        <a href={demo} className={styles.link}>demo</a>
+        {/* <a href={demo} className={styles.link}>demo</a> */}
         <a href={source} className={styles.link}> Source</a>
       </div>
     </div>
