@@ -41,8 +41,7 @@ function Navbar() {
           <li>
             <div className={styles.button} data-tooltip="Size: 20Mb">
               <div className={styles.button_wrapper}>
-                <div className={styles.text}>Resume</div>
-                
+                <a href={downloadResume} className={styles.text}>Resume</a>
                 <a href={downloadResume} className={styles.icon}>
                   <img
                     src={getImageUrl("nav/download.png")} // Replace "path/to/download-icon.png" with the actual path to your PNG image
