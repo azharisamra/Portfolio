@@ -16,7 +16,7 @@
   text-decoration: none;
   color: var(--color-text);
 }
-.menuBtn{
+.menuBtn {
   display: none;
 }
 .menu {
@@ -33,6 +33,19 @@
   font-size: 25px;
   color: var(--color-text);
   text-decoration: none;
+}
+
+.menuitems a:hover {
+  color: var(--color-primary);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.menuitems a.active {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 830px) {
