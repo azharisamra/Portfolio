@@ -4,6 +4,7 @@ import skills from "../../data/skills.json";
 import history from "../../data/history.json";
 import { getImageUrl } from "../../utils";
 import styles from "./Experience.module.css";
+import { Reveal } from "../About/Reveal";
 
 function Experience() {
   return (
@@ -15,7 +16,9 @@ function Experience() {
             return (
               <div key={id} className={styles.skill}>
                 <div className={styles.skillImgContainer}>
+                  <Reveal>
                   <img src={getImageUrl(skill.imageSrc)} alt={skill.title} />
+                  </Reveal>
                 </div>
                 <p>{skill.title}</p>
               </div>
@@ -31,6 +34,7 @@ function Experience() {
                   src={getImageUrl(historyItem.imageSrc)}
                   alt={historyItem.organisation}
                 />
+                <Reveal>
                 <div className={styles.historyItemDetails}>
                   <h3>{`${historyItem.role}, ${historyItem.organisation}`}</h3>
                   <p>{`${historyItem.startDate}, ${historyItem.endDate}`}</p>
@@ -40,6 +44,7 @@ function Experience() {
                     })}
                   </ul>
                 </div>
+                </Reveal>
               </li>
             );
           })}

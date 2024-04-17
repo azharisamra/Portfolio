@@ -4,7 +4,7 @@
     "organisation": "Baker Hughes",
     "startDate": "March, 2023",
     "endDate": "Feb, 2024",
-    "experiences": ["Worked on live projects", "Wrote unit testcases to increase code coverage by 23%", "Designed new dashboard on kibana"],
+    "experiences": ["Worked on live projects to optimize the performance and reduced loading time", "Wrote unit testcases to increase code coverage by 23%", "Designed new dashboard on kibana"],
     "imageSrc": "history/Baker Hughes.png"
   },
   {
@@ -12,6 +12,14 @@
     "organisation": "Adguru Online",
     "startDate": "July, 2022",
     "endDate": "Sep, 2022",
+    "experiences": ["Developed and managed the client websites in different domains, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
+    "imageSrc": "history/AdguruOnlin.png"
+  },
+  {
+    "role": "Web Developer",
+    "organisation": "Resume Jar",
+    "startDate": "Oct, 2020",
+    "endDate": "May, 2021",
     "experiences": ["Developed and managed the company website, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
     "imageSrc": "history/AdguruOnlin.png"
   }

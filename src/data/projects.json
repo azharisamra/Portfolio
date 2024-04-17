@@ -22,5 +22,21 @@
     "skills": ["Java", "Android Studio", "MySQL"],
     "demo": "https://www.example.com",
     "source": "https://drive.google.com/file/d/1bZ8Aah0DPg-mWFEEHyNpsRQGdLwHhtwY/view?usp=sharing"
+  },
+  {
+    "title": "Expense App",
+    "imageSrc": "projects/ExpenseApp.png",
+    "description": "While learning React from Udemy, I successfully created an Expense App by using TypeScript and Material UI framework for styling.",
+    "skills": ["React", "TypeScript", "Material UI" ,"Visual Studio"],
+    "demo": "https://www.example.com",
+    "source": ""
+  },
+  {
+    "title": "My Portfolio",
+    "imageSrc": "projects/portfolio.png",
+    "description": "I've developed a dynamic portfolio showcasing my frontend expertise, using React, JavaScript, and Framer Motion. Leveraging JSON for data management and Visual Studio for development, I've created an engaging user experience with fluid animations and seamless transitions.",
+    "skills": ["React", "JavaScript", "Framer Motion", "JSON" ,"Visual Studio"],
+    "demo": "https://www.example.com",
+    "source": "https://github.com/azharisamra/Portfolio"
   }
 ]

@@ -37,6 +37,8 @@
   font-size: 20px;
   font-family: var(--font-roboto);
   margin-bottom: 52px;
+  list-style: inside;
+  margin-left: ;
 }
 
 .contactbtn {
@@ -51,7 +53,7 @@
 }
 
 .HeroImg {
-  width: 50%;
+  width: 100%;
   z-index: 1;
   animation-name: floating;
   animation-duration: 3s;

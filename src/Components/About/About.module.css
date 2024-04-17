@@ -26,7 +26,7 @@
 }
 
 .aboutimg {
-  width: 35%;
+  width: 100%;
 }
 
 .aboutitems {
@@ -53,6 +53,10 @@
   transition: 0.4s;
 }
 
+.aboutItem img {
+  margin-right: 38px;
+}
+
 .aboutItem:hover {
   background-size: 100% 100%;
 }
@@ -71,16 +75,16 @@
     padding-left: 0;
     padding-right: 0;
   }
-  .content{
+  .content {
     flex-direction: column;
   }
-  .aboutimg{
+  .aboutimg {
     display: none;
   }
-  .aboutitems{
+  .aboutitems {
     margin-top: 29px;
   }
-  .aboutItem{
+  .aboutItem {
     padding-left: 0;
     padding-right: 0;
   }

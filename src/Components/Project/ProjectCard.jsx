@@ -1,4 +1,5 @@
 import { getImageUrl } from "../../utils";
+import { Reveal } from "../About/Reveal";
 import styles from "./ProjectCard.module.css";
 
 export const ProjectCard = ({
@@ -6,6 +7,7 @@ export const ProjectCard = ({
   project: { title, imageSrc, description, skills, source },
 }) => {
   return (
+    <Reveal>
     <div className={styles.container}>
       <img
         src={getImageUrl(imageSrc)}
@@ -28,8 +30,12 @@ export const ProjectCard = ({
       </ul>
       <div className={styles.links}>
         {/* <a href={demo} className={styles.link}>demo</a> */}
-        <a href={source} className={styles.link}> Source</a>
+        <a href={source} className={styles.link}>
+          {" "}
+          Source
+        </a>
       </div>
     </div>
+    </Reveal>
   );
 };

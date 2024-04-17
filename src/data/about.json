@@ -1,0 +1,19 @@
+[
+  {
+    "title": "Frontend Developer",
+    "imageSrc": "about/cursorIcon.png",
+    "description": "I'm a Frontend Developer with experience in building responsive and optimized sites."
+  },
+  {
+    "title": "Backend Developer",
+    "imageSrc": "about/serverIcon.png",
+    "description": "I'm a Backend Developer with experience in developing fast and back-end systems and APIs."
+  
+  },
+  {
+    "title": "UI Designer",
+    "imageSrc": "about/serverIcon.png",
+    "description": "I have designed multiple landing pages and have systems as well."
+  
+  }
+]
