@@ -4,6 +4,8 @@ import { getImageUrl } from "../../utils";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const downloadResume =
+    "https://drive.google.com/file/d/1uvk79ZCDehDU55Z0VP0U9QOBk9UX5eRG/view?usp=drive_link";
   return (
     <nav className={styles.navbar}>
       <a className={styles.title} href="/">
@@ -34,7 +36,23 @@ function Navbar() {
             <a href="#projects">Projects</a>
           </li>
           <li>
-            <a href="#">Contact</a>
+            <a href="#contact">Contact</a>
+          </li>
+          <li>
+            <div className={styles.button} data-tooltip="Size: 20Mb">
+              <div className={styles.button_wrapper}>
+                <div className={styles.text}>Resume</div>
+                
+                <a href={downloadResume} className={styles.icon}>
+                  <img
+                    src={getImageUrl("nav/download.png")} // Replace "path/to/download-icon.png" with the actual path to your PNG image
+                    alt="Download Icon"
+                    width="2em"
+                    height="2em"
+                  />
+                </a>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

@@ -1,30 +1,30 @@
-@import '../../vars.css';
+@import "../../vars.css";
 
-.container{
-    color: var(--color-text);
-    margin-top: 120px;
-    background:var(--color-secondary) ;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100vw;
-    padding: 58px 10%;
-    gap: 10px;
+.container {
+  color: var(--color-text);
+  margin-top: 120px;
+  background: var(--color-secondary);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100vw;
+  padding: 58px 10%;
+  gap: 10px;
 }
 
-.text h2{
-    font-size: 80px;
-    font-weight: 700;
-    letter-spacing: 4px;
+.text h2 {
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: 4px;
 }
 
 .text p {
-    font-size: 40px;
-    font-weight: 400;
-    letter-spacing: 2px;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: 2px;
 }
 
-.links{
+/* .links{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -42,40 +42,164 @@
     font-size: 30px;
     font-weight: 400;
     letter-spacing: 1.5px;
+} */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
+.up {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.down {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.card1 {
+  width: 90px;
+  height: 90px;
+  outline: none;
+  border: none;
+  background: var(--color-dark);
+  border-radius: 90px 5px 5px 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+}
+
+.email {
+  margin-top: 1.5em;
+  margin-left: 1.2em;
+  fill: #f14336;
+}
+
+.card2 {
+  width: 90px;
+  height: 90px;
+  outline: none;
+  border: none;
+  background: var(--color-dark);
+  border-radius: 5px 90px 5px 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+}
+
+.linkedIn {
+  margin-top: 1.5em;
+  margin-left: -0.9em;
+  fill: #03a9f4;
+}
+
+.card3 {
+  width: 90px;
+  height: 90px;
+  outline: none;
+  border: none;
+  background: var(--color-dark);
+  border-radius: 5px 5px 5px 90px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+}
+
+.github {
+  margin-top: -0.6em;
+  margin-left: 1.2em;
+}
+
+.card4 {
+  width: 90px;
+  height: 90px;
+  outline: none;
+  border: none;
+  background: white;
+  border-radius: 5px 5px 90px 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+}
+
+.discord {
+  margin-top: -0.9em;
+  margin-left: -1.2em;
+  fill: #8c9eff;
+}
+
+.card1:hover {
+  cursor: pointer;
+  scale: 1.1;
+  background-color: #f14336;
+}
+
+.card1:hover .Email {
+  fill: white;
+}
+
+.card2:hover {
+  cursor: pointer;
+  scale: 1.1;
+  background-color: #03a9f4;
+}
+
+.card2:hover .linkedIn {
+  fill: white;
+}
+
+.card3:hover {
+  cursor: pointer;
+  scale: 1.1;
+  background-color: black;
+}
+
+.card3:hover .github {
+  fill: white;
+}
 
 @media screen and (max-width: 830px) {
-    .container{
-        flex-direction: column;
-        gap: 23px;
-    }
+  .container {
+    flex-direction: column;
+    gap: 23px;
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-left: 29%;
+    margin-right: 29%;
+  }
 
-    .text{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .text h2{
-        font-size: 40px;
-        font-weight: 700;
-        letter-spacing: 4px;
-    }
-    
-    .text p {
-        font-size: 20px;
-        font-weight: 400;
-        letter-spacing: 2px;
-    }
+  .text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .text h2 {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 4px;
+  }
 
-    .links{
-        align-items: center;
-    }
+  .text p {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 2px;
+  }
 
-    .link a{
-        font-size: 25px;
-        font-weight: 400;
-        letter-spacing: 1.5px;
-    }
+  .links {
+    align-items: center;
+  }
+
+  .link a {
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+  }
 }
-    
