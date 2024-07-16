@@ -1,5 +1,13 @@
 [
   {
+    "role": "Subject Matter Expert",
+    "organisation": "Chegg",
+    "startDate": "March, 2023",
+    "endDate": "Present",
+    "experiences": ["Developed and managed the client websites in different domains, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
+    "imageSrc": "history/chegg_inc__logo.jpg"
+  },
+  {
     "role": "Early Career Trainee",
     "organisation": "Baker Hughes",
     "startDate": "March, 2023",
@@ -14,14 +22,6 @@
     "endDate": "Sep, 2022",
     "experiences": ["Developed and managed the client websites in different domains, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
     "imageSrc": "history/AdguruOnlin.png"
-  },
-    {
-    "role": "Subject Matter Expert",
-    "organisation": "Chegg",
-    "startDate": "March, 2023",
-    "endDate": "Present",
-    "experiences": ["Developed and managed the client websites in different domains, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
-    "imageSrc": "history/chegg_inc__logo.jpg"
   },
   {
     "role": "Web Developer",
