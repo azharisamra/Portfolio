@@ -17,14 +17,18 @@ function Hero() {
                 expertise in the Software Development Life Cycle.
               </li>
               <li>
-                Previously employed as a Frontend Developer (Early Career
-                Trainee) at Baker Hughes, specializing in React and TypeScript
-                development within Agile/Scrum teams.
+                Specializing in React.js and TypeScript development within 
+                Agile/Scrum teams, and was previously employed as a 
+                Frontend Developer (Early Career Trainee) at Baker Hughes.
               </li>
               <li>
                 Proficient in designing, coding, and testing software modules,
                 with a focus on ensuring code reliability and maintainability
                 through the use of Jest, Redux, and other testing libraries. {" "}
+              </li>
+               <li>
+                Currently seeking opportunities as a Frontend Developer to 
+                 contribute expertise and drive innovation in software development.
               </li>
             </ul>
           </Reveal>
