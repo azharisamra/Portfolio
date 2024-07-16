@@ -12,9 +12,9 @@ function Hero() {
           <Reveal>
             <ul className={styles.HeroText}>
               <li>
-                Highly motivated IT professional with a Master's in
-                Computer Application (MCA) and expertise in the Software
-                Development Life Cycle.
+                Highly motivated IT professional with 2.1 years of experience
+                along with that Master's in Computer Application (MCA) and 
+                expertise in the Software Development Life Cycle.
               </li>
               <li>
                 Previously employed as a Frontend Developer (Early Career
@@ -24,7 +24,7 @@ function Hero() {
               <li>
                 Proficient in designing, coding, and testing software modules,
                 with a focus on ensuring code reliability and maintainability
-                through the use of Jest, Redux, and other testing libraries.{" "}
+                through the use of Jest, Redux, and other testing libraries. {" "}
               </li>
             </ul>
           </Reveal>
