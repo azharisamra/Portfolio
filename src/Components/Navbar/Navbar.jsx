@@ -5,7 +5,7 @@ import { getImageUrl } from "../../utils";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const downloadResume =
-    "https://drive.google.com/file/d/1uvk79ZCDehDU55Z0VP0U9QOBk9UX5eRG/view?usp=drive_link";
+    "https://drive.google.com/file/d/1YaujFMjgIqhao-rqGoB6oOURH0-fvQg1/view?usp=sharing";
   return (
     <nav className={styles.navbar}>
       <a className={styles.title} href="/">
