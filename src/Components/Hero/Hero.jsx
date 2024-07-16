@@ -12,7 +12,7 @@ function Hero() {
           <Reveal>
             <ul className={styles.HeroText}>
               <li>
-                I am a full- Highly motivated IT professional with a Master's in
+                Highly motivated IT professional with a Master's in
                 Computer Application (MCA) and expertise in the Software
                 Development Life Cycle.
               </li>
