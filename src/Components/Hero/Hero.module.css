@@ -40,7 +40,9 @@
   list-style: inside;
   margin-left: ;
 }
-
+ul {
+  list-style-type: none;
+}
 .contactbtn {
   text-decoration: none;
   background-color: var(--color-primary);
