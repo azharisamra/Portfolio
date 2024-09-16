@@ -22,7 +22,7 @@
 .title {
   font-size: 60px;
   font-weight: 900;
-  margin-bottom: 33px;
+  margin-bottom: 116px;
   font-family: var(--font-roboto);
   background: linear-gradient(
     90deg,
@@ -38,9 +38,7 @@
   font-family: var(--font-roboto);
   margin-bottom: 52px;
   list-style: inside;
-  margin-left: ;
-}
-ul {
+  /* margin-left: ; */
   list-style-type: none;
 }
 .contactbtn {
@@ -52,6 +50,7 @@ ul {
   font-weight: 600;
   padding: 17px 26px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+  margin-top: 65px
 }
 
 .HeroImg {
