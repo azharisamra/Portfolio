@@ -12,11 +12,11 @@ function Hero() {
           <Reveal>
             <ul className={styles.HeroText}>
               <li>
-                Highly motivated IT professional with 2.1 years of experience
-                along with that Master's in Computer Application (MCA) and 
-                expertise in the Software Development Life Cycle.
+                IT professional with 2.1 years of experience and a Master's in Computer Application (MCA). 
+                Expertise in React.js, TypeScript, Java, and Agile/Scrum methodologies. Proficient in designing, 
+                coding, and testing software with Jest, Redux, and strong Data Structures and Algorithms (DSA) skills.
               </li>
-              <li>
+{/*               <li>
                 Specializing in React.js and TypeScript development within 
                 Agile/Scrum teams, and was previously employed as a 
                 Frontend Developer (Early Career Trainee) at Baker Hughes.
@@ -29,7 +29,7 @@ function Hero() {
                <li>
                 Currently seeking opportunities as a Frontend Developer to 
                  contribute expertise and drive innovation in software development.
-              </li>
+              </li> */}
             </ul>
           </Reveal>
 
