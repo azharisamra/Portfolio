@@ -7,6 +7,14 @@ const About = () => {
   return (
     <section className={styles.container} id="about">
       <h2 className={styles.title}>About</h2>
+      <p className={styles.aboutText}>
+        As a versatile developer, I specialize in creating seamless digital
+        experiences. With expertise in both frontend and backend development, I
+        build responsive and optimized websites that deliver exceptional
+        performance. My skills in UI design allow me to craft intuitive and
+        engaging interfaces, ensuring a user-friendly experience across all
+        platforms. Frontend Developer
+      </p>
       <div className={styles.content}>
         <Reveal>
           <img
