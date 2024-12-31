@@ -2,18 +2,16 @@
   {
     "title": "Frontend Developer",
     "imageSrc": "about/cursorIcon.png",
-    "description": "I'm a Frontend Developer with experience in building responsive and optimized sites."
+    "description": "I excel in building responsive and optimized sites, focusing on delivering a smooth and engaging user experience"
   },
   {
     "title": "Backend Developer",
     "imageSrc": "about/serverIcon.png",
-    "description": "I'm a Backend Developer with experience in developing fast and back-end systems and APIs."
-  
+    "description": "I develop robust backend systems and APIs, ensuring fast and reliable performance for all applications."
   },
   {
     "title": "UI Designer",
     "imageSrc": "about/serverIcon.png",
-    "description": "I have designed multiple landing pages and have systems as well."
-  
+    "description": "I design intuitive and visually appealing landing pages, enhancing user interaction and satisfaction."
   }
 ]

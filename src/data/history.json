@@ -1,9 +1,17 @@
 [
   {
+    "role": "Advanced AI Coder Expert",
+    "organisation": "Outlier",
+    "startDate": "October, 2024",
+    "endDate": "Present",
+    "experiences": ["Develop and implement advanced AI-driven coding solutions, optimizing performance and functionality.", "Ensure high-quality deliverables with a focus on accuracy and efficiency, consistently receiving positive feedback."],
+    "imageSrc": "history/outlier.jpg"
+  },
+  {
     "role": "Subject Matter Expert",
     "organisation": "Chegg",
     "startDate": "March, 2023",
-    "endDate": "Present",
+    "endDate": "August 2024",
     "experiences": ["Provide solutions and support for various technical subjects, specializing in computer science and software development topics.", "Assist students with understanding complex programming concepts, debugging code, and improving coding skills.", "Maintain a high level of accuracy and quality in responses, consistently receiving positive feedback from users."],
     "imageSrc": "history/chegg_inc__logo.jpg"
   },

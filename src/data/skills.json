@@ -1,19 +1,27 @@
 [
   {
-    "title": "HTML",
-    "imageSrc": "skills/html.png"
+    "title": "React",
+    "imageSrc": "skills/react.png"
+  },
+  {
+    "title": "Vite",
+    "imageSrc": "skills/vite.png"
   },
   {
     "title": "CSS",
     "imageSrc": "skills/css.png"
   },
   {
-    "title": "React",
-    "imageSrc": "skills/react.png"
+    "title": "HTML",
+    "imageSrc": "skills/html.png"
   },
   {
     "title": "Node",
     "imageSrc": "skills/node.png"
+  },
+  {
+    "title": "MySQL",
+    "imageSrc": "skills/mysql.jpg"
   },
   {
     "title": "Material UI",
@@ -22,6 +30,14 @@
   {
     "title": "Figma",
     "imageSrc": "skills/figma.png"
+  },
+  {
+    "title": "SonarQube",
+    "imageSrc": "skills/sonarqube.jpg"
+  },
+  {
+    "title": "NVM",
+    "imageSrc": "skills/nvm.ico"
   },
   {
     "title": "Java",
