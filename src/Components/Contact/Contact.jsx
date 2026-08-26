@@ -1,55 +1,61 @@
 import { getImageUrl } from "../../utils";
 import styles from "./Contact.module.css";
-import { Reveal } from "../About/Reveal";
+import { Reveal, Stagger, RevealItem } from "../Reveal/Reveal";
+
+const LINKS = [
+  {
+    label: "Email Samra",
+    href: "mailto:azharisamra@gmail.com",
+    icon: "contact/emailIcon.png",
+    cardClass: "cardEmail",
+  },
+  {
+    label: "Samra on LinkedIn",
+    href: "https://www.linkedin.com/in/ansarisamra/",
+    icon: "contact/linkedinIcon.png",
+    cardClass: "cardLinkedin",
+  },
+  {
+    label: "Samra on GitHub",
+    href: "https://github.com/azharisamra",
+    icon: "contact/githubIcon.png",
+    cardClass: "cardGithub",
+  },
+];
 
 function Contact() {
   return (
     <footer id="contact" className={styles.container}>
-      <Reveal>
-        <div className={styles.text}>
-          <h2>Contact</h2>
-          <p>Feel Free to Contact</p>
-        </div>
-      </Reveal>
-      <div className={styles.main}>
-        <div className={styles.up}>
-          <a href="mailto:azharisamra@gmail.com">
-            <button className={styles.card1}>
-              <img
-                src={getImageUrl("contact/emailIcon.png")}
-                alt="Email"
-                width="30px"
-                height="30px"
-                className={styles.Instagram}
-              />
-            </button>
-          </a>
-          <a href="https://www.linkedin.com/in/ansarisamra/">
-            <button className={styles.card2}>
-              <img
-                src={getImageUrl("contact/linkedinIcon.png")}
-                alt="linkedIn"
-                width="30px"
-                height="30px"
-                className={styles.LinkedIn}
-              />
-            </button>
-          </a>
-        </div>
-        <div className={styles.down}>
-          <a href="https://github.com/azharisamra">
-            <button className={styles.card3}>
-              <img
-                src={getImageUrl("contact/githubIcon.png")}
-                alt="GitHub"
-                width="30px"
-                height="30px"
-                className={styles.github}
-              />
-            </button>
-          </a>
-        </div>
+      <div className={styles.inner}>
+        <Reveal width="auto" className={styles.textWrap}>
+          <div className={styles.text}>
+            <h2>Contact</h2>
+            <p>Feel free to reach out — I&apos;m open to new opportunities.</p>
+          </div>
+        </Reveal>
+
+        {/* Anchors carry the styling directly; a <button> nested inside an
+            <a> is invalid markup and breaks keyboard activation. */}
+        <Stagger className={styles.grid} stagger={0.1}>
+          {LINKS.map(({ label, href, icon, cardClass }) => (
+            <RevealItem key={label} direction="down">
+              <a
+                className={`${styles.card} ${styles[cardClass]}`}
+                href={href}
+                aria-label={label}
+                target={href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={href.startsWith("mailto:") ? undefined : "noreferrer"}
+              >
+                <img src={getImageUrl(icon)} alt="" width="30" height="30" />
+              </a>
+            </RevealItem>
+          ))}
+        </Stagger>
       </div>
+
+      <p className={styles.copyright}>
+        © {new Date().getFullYear()} Samra Hifzur Rahman. Built with React &amp; Vite.
+      </p>
     </footer>
   );
 }

@@ -1,17 +1,17 @@
 [
   {
-    "title": "Frontend Developer",
+    "title": "Frontend Engineering",
     "imageSrc": "about/cursorIcon.png",
-    "description": "I excel in building responsive and optimized sites, focusing on delivering a smooth and engaging user experience"
+    "description": "I ship React and TypeScript products — interactive dashboards, responsive interfaces, and design systems built with Next.js, Redux and Framer Motion."
   },
   {
-    "title": "Backend Developer",
-    "imageSrc": "about/serverIcon.png",
-    "description": "I develop robust backend systems and APIs, ensuring fast and reliable performance for all applications."
+    "title": "AI Training & Evaluation",
+    "imageSrc": "about/uiIcon.png",
+    "description": "I write prompts and task scenarios for model training pipelines, design benchmark rubrics, and audit verifiers to catch false passes before they ship."
   },
   {
-    "title": "UI Designer",
+    "title": "Full Stack & Cloud",
     "imageSrc": "about/serverIcon.png",
-    "description": "I design intuitive and visually appealing landing pages, enhancing user interaction and satisfaction."
+    "description": "I build REST APIs with Node.js, Spring Boot and Flask, and work across AWS CDK, Docker and LocalStack to provision the environments they run in."
   }
 ]
