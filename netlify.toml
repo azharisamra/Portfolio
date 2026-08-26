@@ -1,0 +1,17 @@
+# Build configuration lives here rather than in the Netlify dashboard so it is
+# versioned, reviewable, and travels with the branch — a deploy preview builds
+# with the settings from its own commit.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Pinned deliberately, and not arbitrary:
+  #   - `ai` and `@ai-sdk/*` declare engines >= 22, so Node 20 is out.
+  #   - package-lock.json is produced by npm 11, which ships with Node 24.
+  #     npm 10 (bundled with Node 20 and 22) rejects that lockfile with
+  #     "npm error code EUSAGE ... Missing: @emnapi/runtime from lock file"
+  #     and the install step fails before any build output exists.
+  # Keep this, .nvmrc, and .github/workflows/ci.yml on the same major version.
+  NODE_VERSION = "24"
