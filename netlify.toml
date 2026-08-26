@@ -6,6 +6,15 @@
   command = "npm run build"
   publish = ".next"
 
+# Declared explicitly rather than relying on framework auto-detection.
+#
+# This site is server-rendered: `.next` has no index.html at its root (the
+# prerendered document is at .next/server/app/index.html) and /api/ask needs a
+# function. Published as a plain static directory, every path 404s. The runtime
+# is what maps prerendered routes and turns the route handler into a function.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build.environment]
   # Pinned deliberately, and not arbitrary:
   #   - `ai` and `@ai-sdk/*` declare engines >= 22, so Node 20 is out.
