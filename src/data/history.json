@@ -1,42 +1,53 @@
 [
   {
-    "role": "Advanced AI Coder Expert",
-    "organisation": "Outlier",
-    "startDate": "October, 2024",
+    "role": "Quality Manager, Operations (QMO)",
+    "organisation": "Outlier AI",
+    "location": "Mumbai",
+    "startDate": "Oct 2024",
     "endDate": "Present",
-    "experiences": ["Develop and implement advanced AI-driven coding solutions, optimizing performance and functionality.", "Ensure high-quality deliverables with a focus on accuracy and efficiency, consistently receiving positive feedback."],
+    "experiences": [
+      "Write prompts and task scenarios used directly in AI model training and fine-tuning pipelines, and design the rubrics and verifiers that evaluate them.",
+      "Own quality standards for AI coding benchmarks: write and audit task rubrics for atomicity, outcome-based framing, and non-overlapping criteria.",
+      "Review and validate coding-benchmark projects spanning Python, JavaScript, TypeScript, Java, HTML/CSS, YAML, and JSON, checking verifier scripts and test suites for synthetic environments provisioned with AWS CDK, Docker, and LocalStack — catching test gaps, false passes, and under-specified tasks before they ship.",
+      "Extended benchmark auditing to agentic tasks: reviewed rubrics and verifiers for MCP-based tool-calling workflows and multi-agent coordination scenarios.",
+      "Diagnosed and hardened benchmark tasks that weren't testing what they claimed to — rewrote a cloud infrastructure task so it couldn't be passed by accident, then re-verified it across repeated trial runs.",
+      "Built onboarding materials, including a training deck and a scored practice course, to ramp up new contributors on quality standards."
+    ],
     "imageSrc": "history/outlier.jpg"
   },
   {
-    "role": "Subject Matter Expert",
-    "organisation": "Chegg",
-    "startDate": "March, 2023",
-    "endDate": "August 2024",
-    "experiences": ["Provide solutions and support for various technical subjects, specializing in computer science and software development topics.", "Assist students with understanding complex programming concepts, debugging code, and improving coding skills.", "Maintain a high level of accuracy and quality in responses, consistently receiving positive feedback from users."],
-    "imageSrc": "history/chegg_inc__logo.jpg"
-  },
-  {
-    "role": "Early Career Trainee",
+    "role": "Early Career Trainee (Frontend)",
     "organisation": "Baker Hughes",
-    "startDate": "March, 2023",
-    "endDate": "Feb, 2024",
-    "experiences": ["Worked on live projects to optimize the performance and reduced loading time", "Wrote unit testcases to increase code coverage by 23%", "Designed new dashboard on kibana"],
+    "location": "Mumbai",
+    "startDate": "Mar 2023",
+    "endDate": "Feb 2024",
+    "experiences": [
+      "Built interactive dashboards for real-time oil and gas well data using React.js, TypeScript, and Redux, reducing load time by 30%.",
+      "Wrote unit tests with Jest & Enzyme and took part in code reviews within an Agile/Scrum team, improving code coverage and reducing bugs by 20%.",
+      "Contributed to frontend features across the full SDLC, from design through deployment, following team coding standards."
+    ],
     "imageSrc": "history/Baker Hughes.png"
   },
   {
     "role": "Web Developer",
     "organisation": "Adguru Online",
-    "startDate": "July, 2022",
-    "endDate": "Sep, 2022",
-    "experiences": ["Developed and managed the client websites in different domains, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
+    "location": "Mumbai",
+    "startDate": "Jul 2022",
+    "endDate": "Sep 2022",
+    "experiences": [
+      "Delivered 4+ responsive, SEO-optimized websites with cross-browser compatibility and improved load performance."
+    ],
     "imageSrc": "history/AdguruOnlin.png"
   },
   {
     "role": "Web Developer",
     "organisation": "Resume Jar",
-    "startDate": "Oct, 2020",
-    "endDate": "May, 2021",
-    "experiences": ["Developed and managed the company website, handling both front and backend", "Ensured mobile and desktop compatibility through responsive design.", "Managed SEO efforts to improve website visibility and ranking", "Conducted regular maintenance and updates for optimal performance"],
+    "location": "Mumbai",
+    "startDate": "Oct 2020",
+    "endDate": "May 2021",
+    "experiences": [
+      "Maintained and enhanced the company website, implementing responsive design and SEO optimizations to improve user engagement."
+    ],
     "imageSrc": "history/resume_jar_logo.jpg"
   }
 ]

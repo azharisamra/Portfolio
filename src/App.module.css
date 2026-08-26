@@ -1,8 +1,11 @@
 @import "./vars.css";
 
-.App{
-    background-color: var(--color-bg);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.App {
+  background-color: var(--color-bg);
+  width: 100%;
+  min-height: 100%;
+  /* `clip` instead of `hidden`: it still contains the blurred hero glows
+     but does not create a scroll container, which would break the
+     sticky navbar. */
+  overflow-x: clip;
 }

@@ -2,204 +2,132 @@
 
 .container {
   color: var(--color-text);
-  margin-top: 120px;
+  margin-top: 110px;
   background: var(--color-secondary);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  padding: 56px var(--gutter) 28px;
+}
+
+.inner {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: 100vw;
-  padding: 58px 10%;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+/* Let the heading block flex so the icon cluster stays on the same row
+   instead of being pushed onto its own line. */
+.textWrap {
+  flex: 1 1 420px;
 }
 
 .text h2 {
-  font-size: 80px;
+  font-size: clamp(40px, 5.5vw, 72px);
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
 }
 
 .text p {
-  font-size: 40px;
+  font-size: clamp(16px, 1.7vw, 22px);
   font-weight: 400;
-  letter-spacing: 2px;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+  margin-top: 6px;
 }
 
-/* .links{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    list-style: none;
-    gap: 26px;
+/* Two-column grid reproduces the notched 3-tile cluster. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 84px);
+  gap: 8px;
 }
-.link{
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-.link a{
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: 30px;
-    font-weight: 400;
-    letter-spacing: 1.5px;
-} */
 
-.main {
+.card {
   display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
-
-.up {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-
-.down {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-
-.card1 {
-  width: 90px;
-  height: 90px;
-  outline: none;
-  border: none;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
   background: var(--color-dark);
-  border-radius: 90px 5px 5px 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0 1px 3px -1px;
+  transition: transform var(--dur-med) var(--ease-out-soft),
+    background var(--dur-med) var(--ease-out-soft),
+    box-shadow var(--dur-med) var(--ease-out-soft);
 }
 
-.email {
-  margin-top: 1.5em;
-  margin-left: 1.2em;
-  fill: #f14336;
+.card img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: transform var(--dur-med) var(--ease-out-soft);
 }
 
-.card2 {
-  width: 90px;
-  height: 90px;
-  outline: none;
-  border: none;
-  background: var(--color-dark);
-  border-radius: 5px 90px 5px 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
+.card:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-accent);
 }
 
-.linkedIn {
-  margin-top: 1.5em;
-  margin-left: -0.9em;
-  fill: #03a9f4;
+.card:hover img {
+  transform: scale(1.12);
 }
 
-.card3 {
-  width: 90px;
-  height: 90px;
-  outline: none;
-  border: none;
-  background: var(--color-dark);
-  border-radius: 5px 5px 5px 90px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
+.cardEmail {
+  border-radius: 84px 6px 6px 6px;
 }
 
-.github {
-  margin-top: -0.6em;
-  margin-left: 1.2em;
+.cardEmail:hover {
+  background: #f14336;
 }
 
-.card4 {
-  width: 90px;
-  height: 90px;
-  outline: none;
-  border: none;
-  background: white;
-  border-radius: 5px 5px 90px 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
+.cardLinkedin {
+  border-radius: 6px 84px 6px 6px;
 }
 
-.discord {
-  margin-top: -0.9em;
-  margin-left: -1.2em;
-  fill: #8c9eff;
+.cardLinkedin:hover {
+  background: #03a9f4;
 }
 
-.card1:hover {
-  cursor: pointer;
-  scale: 1.1;
-  background-color: #f14336;
+.cardGithub {
+  border-radius: 6px 6px 6px 84px;
 }
 
-.card1:hover .Email {
-  fill: white;
+.cardGithub:hover {
+  background: #161b22;
 }
 
-.card2:hover {
-  cursor: pointer;
-  scale: 1.1;
-  background-color: #03a9f4;
-}
-
-.card2:hover .linkedIn {
-  fill: white;
-}
-
-.card3:hover {
-  cursor: pointer;
-  scale: 1.1;
-  background-color: black;
-}
-
-.card3:hover .github {
-  fill: white;
+.copyright {
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  color: var(--color-text-dim);
+  text-align: center;
 }
 
 @media screen and (max-width: 830px) {
   .container {
-    flex-direction: column;
-    gap: 23px;
+    padding-left: 6%;
+    padding-right: 6%;
   }
-  .main {
-    display: flex;
+
+  .inner {
     flex-direction: column;
-    gap: 0.5em;
-    margin-left: 29%;
-    margin-right: 29%;
+    gap: 28px;
   }
 
   .text {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .text h2 {
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: 4px;
+    text-align: center;
   }
 
-  .text p {
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 2px;
-  }
-
-  .links {
-    align-items: center;
-  }
-
-  .link a {
-    font-size: 25px;
-    font-weight: 400;
-    letter-spacing: 1.5px;
+  .card:hover {
+    transform: none;
   }
 }

@@ -1,17 +1,17 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      'react-scroll': 'react-scroll/modules/components/Link',
-    },
+  build: {
+    // Keep bundler output out of /assets so the images copied from
+    // public/assets never collide with hashed build chunks.
+    assetsDir: "bundle",
   },
-  css:{
-    modules:{
+  css: {
+    modules: {
       localsConvention: "camelCase",
     },
-  }
-})
+  },
+});

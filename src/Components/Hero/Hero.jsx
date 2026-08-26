@@ -1,54 +1,79 @@
-import { Reveal } from "../About/Reveal";
+import { motion, useReducedMotion } from "framer-motion";
+import { Reveal } from "../Reveal/Reveal";
 import { getImageUrl } from "../../utils";
 import styles from "./Hero.module.css";
+
+const HEADLINE = ["Hi,", "I'm", "Samra"];
+
 function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section className={styles.container}>
+    <section className={styles.container} id="top">
       <div className={styles.content}>
-        <Reveal>
-          <h1 className={styles.title}>Hi, I'm Samra</h1>
-        </Reveal>
-        <Reveal>
-          <ul className={styles.HeroText}>
-            <li>
-              Innovative <b>Software Developer</b> with over <b>2 years of experience</b> and
-              a Master's in Computer Applications (MCA). Specializing in
-              <b>React.js, JavaScript, TypeScript, Java, and Agile/Scrum methodologies</b>, I excel
-              at building scalable, high-performance applications. Passionate
-              about solving complex problems with strong <b>Data Structures and
-              Algorithms (DSA)</b> expertise.
-            </li>
-            {/*               <li>
-                Specializing in React.js and TypeScript development within 
-                Agile/Scrum teams, and was previously employed as a 
-                Frontend Developer (Early Career Trainee) at Baker Hughes.
-              </li>
-              <li>
-                Proficient in designing, coding, and testing software modules,
-                with a focus on ensuring code reliability and maintainability
-                through the use of Jest, Redux, and other testing libraries. {" "}
-              </li>
-               <li>
-                Currently seeking opportunities as a Frontend Developer to 
-                 contribute expertise and drive innovation in software development.
-              </li> */}
-          </ul>
+        <p className={styles.eyebrow}>Mumbai, India</p>
+        <motion.h1
+          className={styles.title}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
+          }}
+          initial="hidden"
+          animate="visible"
+        >
+          {HEADLINE.map((word, index) => (
+            <motion.span
+              key={word}
+              className={
+                index === HEADLINE.length - 1 ? styles.name : styles.word
+              }
+              variants={{
+                hidden: { opacity: 0, y: reduceMotion ? 0 : 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </motion.h1>
+
+        <Reveal width="100%" delay={0.5}>
+          <p className={styles.heroText}>
+            <b>Software engineer</b> with <b>4+ years</b> across frontend, full
+            stack, and <b>AI training &amp; evaluation</b>. I ship{" "}
+            <b>React</b> and <b>TypeScript</b> products, write the prompts and
+            task scenarios used in AI model training pipelines, and audit AI
+            coding benchmarks — rubric design, verifier validation, and catching
+            false passes in synthetic environments built on AWS CDK, Docker and
+            LocalStack.
+          </p>
         </Reveal>
 
-        <a href="mailto:azharisamra@gmail.com" className={styles.contactbtn}>
-          {" "}
-          Contact Me{" "}
-        </a>
+        <Reveal delay={0.7}>
+          <div className={styles.actions}>
+            <a href="#contact" className={styles.contactbtn}>
+              Contact Me
+            </a>
+            <a href="#projects" className={styles.ghostbtn}>
+              View Work
+            </a>
+          </div>
+        </Reveal>
       </div>
-      <Reveal>
+
+      <Reveal width="100%" className={styles.imageWrap} direction="left" delay={0.35}>
         <img
           src={getImageUrl("hero/heroImage.png")}
-          alt="Samra"
-          className={styles.HeroImg}
+          alt="Illustration of Samra"
+          className={styles.heroImg}
+          width="480"
+          height="480"
         />
       </Reveal>
+
       <div className={styles.topBlur} />
-      <div className={styles.BottomBlur} />
+      <div className={styles.bottomBlur} />
     </section>
   );
 }
