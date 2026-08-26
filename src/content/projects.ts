@@ -39,11 +39,17 @@ export const projects: readonly Project[] = [
     liveUrl: "https://samraazhari.netlify.app",
     repoUrl: "https://github.com/azharisamra/Portfolio",
     featured: true,
+    image: {
+      src: "/images/portfolio-home.webp",
+      alt: "This portfolio in dark mode: the name set large in condensed capitals, a role line in orange, a short bio, and a rule-separated list of contact links above the Selected Work heading.",
+      width: 1408,
+      height: 880,
+    },
   },
   {
     slug: "artify",
     title: "Artify",
-    timeframe: "Jun – Aug 2023",
+    timeframe: "Jul 2025",
     // Rewritten to match the deployed site, which is an AI image-generation
     // product rather than the artist showcase this previously described.
     problem:
@@ -64,7 +70,7 @@ export const projects: readonly Project[] = [
   {
     slug: "athletee",
     title: "Athletee",
-    timeframe: "Apr – Jun 2023",
+    timeframe: "Jul 2025",
     problem:
       "Athletes and sports brands depend on platforms they don't own and can't shape to present themselves the way they want.",
     description: "Next.js and Framer Motion animated athlete site.",
