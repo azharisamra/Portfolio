@@ -1,124 +1,71 @@
-import type { Education, Role, SkillGroup } from "./types";
+export interface Role {
+  company: string;
+  title: string;
+  location: string;
+  /** Human-readable, e.g. "Oct 2024". */
+  startDate: string;
+  /** `null` means this is the current role. */
+  endDate: string | null;
+  bullets: readonly string[];
+}
 
-export const roles: readonly Role[] = [
+/**
+ * Titles, companies, locations and dates come from the brief.
+ *
+ * The bullets do NOT — the brief lists no role descriptions. They are drafted
+ * from your resume PDF, which the brief names as the source of truth for this
+ * section. Every figure in them ("30%", "20%", "4+") is yours, from that
+ * document; none was invented here. Review before shipping.
+ */
+export const experience: readonly Role[] = [
   {
-    role: "Quality Manager, Operations (QMO)",
-    organisation: "Outlier AI",
+    company: "Outlier AI",
+    title: "Quality Manager, Operations (QMO)",
     location: "Mumbai",
     startDate: "Oct 2024",
-    endDate: "Present",
-    highlights: [
+    endDate: null,
+    bullets: [
       "Write prompts and task scenarios used directly in AI model training and fine-tuning pipelines, and design the rubrics and verifiers that evaluate them.",
-      "Own quality standards for AI coding benchmarks: write and audit task rubrics for atomicity, outcome-based framing, and non-overlapping criteria.",
-      "Review and validate coding-benchmark projects spanning Python, JavaScript, TypeScript, Java, HTML/CSS, YAML, and JSON, checking verifier scripts and test suites for synthetic environments provisioned with AWS CDK, Docker, and LocalStack.",
-      "Extended benchmark auditing to agentic tasks: reviewed rubrics and verifiers for MCP-based tool-calling workflows and multi-agent coordination scenarios.",
-      "Built onboarding materials, including a training deck and a scored practice course, to ramp up new contributors on quality standards.",
+      "Audit task rubrics across AI coding benchmarks for atomicity, outcome-based framing, and non-overlapping criteria.",
+      "Review verifier scripts and test suites for synthetic environments provisioned with AWS CDK, Docker and LocalStack, catching test gaps and false passes before they ship.",
+      "Build onboarding material for new contributors, including a training deck and a scored practice course.",
     ],
   },
   {
-    role: "Early Career Trainee (Frontend)",
-    organisation: "Baker Hughes",
+    company: "Baker Hughes",
+    title: "Early Career Trainee (Frontend)",
     location: "Mumbai",
     startDate: "Mar 2023",
     endDate: "Feb 2024",
-    highlights: [
-      "Built interactive dashboards for real-time oil and gas well data using React.js, TypeScript, and Redux, reducing load time by 30%.",
-      "Wrote unit tests with Jest & Enzyme and took part in code reviews within an Agile/Scrum team, improving code coverage and reducing bugs by 20%.",
-      "Contributed to frontend features across the full SDLC, from design through deployment.",
+    bullets: [
+      "Built interactive dashboards for real-time oil and gas well data using React, TypeScript and Redux, reducing load time by 30%.",
+      "Wrote unit tests with Jest and Enzyme inside an Agile/Scrum team, improving code coverage and reducing bugs by 20%.",
+      "Shipped frontend features across the full SDLC, from design through deployment.",
     ],
   },
   {
-    role: "Web Developer",
-    organisation: "Adguru Online",
+    company: "Adguru Online",
+    title: "Web Developer",
     location: "Mumbai",
     startDate: "Jul 2022",
     endDate: "Sep 2022",
-    highlights: [
-      "Delivered 4+ responsive, SEO-optimized websites with cross-browser compatibility and improved load performance.",
+    // TODO(samra): your resume carries one bullet for this role; these two are
+    // that sentence split in half. Send more detail if you want real coverage.
+    bullets: [
+      "Delivered 4+ responsive, SEO-optimised client websites across different domains.",
+      "Ensured cross-browser compatibility and improved load performance on every site delivered.",
     ],
   },
   {
-    role: "Web Developer",
-    organisation: "Resume Jar",
+    company: "Resume Jar",
+    title: "Web Developer",
     location: "Mumbai",
     startDate: "Oct 2020",
     endDate: "May 2021",
-    highlights: [
-      "Maintained and enhanced the company website, implementing responsive design and SEO optimizations to improve user engagement.",
+    // TODO(samra): same as above — one resume bullet, split into two.
+    bullets: [
+      "Maintained and extended the company website, implementing responsive layouts across breakpoints.",
+      "Applied SEO optimisations to improve user engagement.",
     ],
-  },
-];
-
-export const skillGroups: readonly SkillGroup[] = [
-  {
-    category: "AI & Evaluation",
-    items: [
-      "Prompt engineering",
-      "Task authoring for model training",
-      "Benchmark rubric design",
-      "Verifier auditing",
-      "False-pass detection",
-      "LLM output evaluation",
-      "Agentic / tool-calling review (MCP)",
-    ],
-  },
-  {
-    category: "Languages",
-    items: [
-      "TypeScript",
-      "JavaScript (ES6)",
-      "Java",
-      "Python",
-      "SQL",
-      "HTML",
-      "CSS",
-      "YAML",
-    ],
-  },
-  {
-    category: "Frontend",
-    items: ["React.js", "Redux", "Next.js", "Tailwind CSS", "Framer Motion"],
-  },
-  {
-    category: "Backend",
-    items: ["Node.js", "Spring Boot", "Flask", "REST APIs"],
-  },
-  {
-    category: "Cloud & Infra",
-    items: [
-      "AWS",
-      "Infrastructure as Code (AWS CDK)",
-      "Docker",
-      "LocalStack",
-      "CI/CD",
-      "Jenkins",
-    ],
-  },
-  {
-    category: "Testing",
-    items: ["Jest", "Enzyme", "React Testing Library"],
-  },
-  {
-    category: "Databases",
-    items: ["MongoDB", "MySQL", "Firebase"],
-  },
-  {
-    category: "Tools",
-    items: ["Git", "Figma", "Storybook", "Webpack", "NPM"],
-  },
-];
-
-export const education: readonly Education[] = [
-  {
-    degree: "Master of Computer Application",
-    institution: "SNDT Women's University",
-    location: "Mumbai",
-    year: "2023",
-  },
-  {
-    degree: "Bachelor of Computer Science",
-    institution: "JAT Arts, Science & Commerce College",
-    location: "Mumbai",
-    year: "2021",
   },
 ];
