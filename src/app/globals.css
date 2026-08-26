@@ -79,6 +79,17 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Anchor jumps must clear the pinned bar rather than land under it. */
+    scroll-padding-top: 5rem;
+  }
+
+  /* The skip link's target. Matches the compact bar height plus a little air. */
+  #main-content {
+    scroll-margin-top: 5rem;
+  }
+
   body {
     background-color: var(--color-ground);
     color: var(--color-ink);
@@ -160,6 +171,148 @@
       animation: reveal-in linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Masthead choreography
+
+   Same contract as .reveal-on-scroll above: everything lives inside
+   @supports + prefers-reduced-motion, and the UNANIMATED state is the full,
+   normal masthead. Where scroll timelines are unsupported or motion is
+   reduced, the bar is transparent and shows only the theme toggle exactly
+   where it sits today, the name is full size, and the bio is visible. There is
+   no code path that leaves the header collapsed.
+
+   The bar is `fixed`, so it occupies no space in flow. That is deliberate: the
+   header's natural height ranges from 769px at 320px wide to 525px at 1280px
+   as the bio rewraps, so a spacer matched to it would clip or gap at most
+   widths. Nothing here animates a layout property on an in-flow element, so
+   the page never shifts under the reader.
+   --------------------------------------------------------------------------- */
+
+.masthead-bar-inner {
+  /* Matches the page wrapper's py-12 / sm:py-16 so the toggle does not move on
+     first paint. Animated down to a 64px bar. */
+  --masthead-pad-top: 3rem;
+  padding-top: var(--masthead-pad-top);
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masthead-bar-inner {
+    --masthead-pad-top: 4rem;
+  }
+}
+
+/* Full state: no background, and the bar's own text hidden so only the toggle
+   shows. This is what unsupported browsers and reduced-motion users get. */
+.masthead-bar {
+  background-color: transparent;
+}
+
+.masthead-bar-fade {
+  opacity: 0;
+}
+
+.masthead-progress {
+  transform: scaleX(0);
+}
+
+/* No edge at scroll 0, matching the page as it looks today. */
+.masthead-track {
+  opacity: 0;
+}
+
+@keyframes masthead-bar-compress {
+  to {
+    background-color: var(--color-ground);
+  }
+}
+
+@keyframes masthead-track-reveal {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes masthead-bar-pad {
+  to {
+    padding-top: 1rem;
+  }
+}
+
+@keyframes masthead-bar-reveal {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes masthead-name-shrink {
+  to {
+    /* Compositor-only. The computed font-size stays at --text-display, so the
+       six-size type scale is never interpolated through. */
+    transform: scale(0.42);
+    opacity: 0;
+  }
+}
+
+@keyframes masthead-bio-collapse {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes masthead-progress-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .masthead-bar {
+      animation: masthead-bar-compress linear both;
+      animation-timeline: scroll();
+      animation-range: 6rem 12rem;
+    }
+
+    .masthead-bar-inner {
+      animation: masthead-bar-pad linear both;
+      animation-timeline: scroll();
+      animation-range: 0 12rem;
+    }
+
+    .masthead-track {
+      animation: masthead-track-reveal linear both;
+      animation-timeline: scroll();
+      animation-range: 6rem 12rem;
+    }
+
+    .masthead-bar-fade {
+      animation: masthead-bar-reveal linear both;
+      animation-timeline: scroll();
+      animation-range: 8rem 14rem;
+    }
+
+    .masthead-name {
+      animation: masthead-name-shrink linear both;
+      animation-timeline: scroll();
+      animation-range: 0 14rem;
+    }
+
+    .masthead-bio {
+      animation: masthead-bio-collapse linear both;
+      animation-timeline: scroll();
+      animation-range: 0 8rem;
+    }
+
+    /* Reading progress spans the whole document, not the compression range. */
+    .masthead-progress {
+      animation: masthead-progress-fill linear both;
+      animation-timeline: scroll();
     }
   }
 }

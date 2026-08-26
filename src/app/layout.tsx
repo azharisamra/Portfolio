@@ -82,7 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             theme control and the header links straight into the sections. */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-accent focus:px-4 focus:py-2 focus:font-condensed focus:text-label focus:text-ground focus:uppercase"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-60 focus:bg-accent focus:px-4 focus:py-2 focus:font-condensed focus:text-label focus:text-ground focus:uppercase"
         >
           Skip to main content
         </a>
