@@ -157,7 +157,7 @@
 @keyframes reveal-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
@@ -170,7 +170,7 @@
     .reveal-on-scroll {
       animation: reveal-in linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 45%;
+      animation-range: entry 0% entry 70%;
     }
   }
 }
@@ -203,6 +203,26 @@
 @media (min-width: 640px) {
   .masthead-bar-inner {
     --masthead-pad-top: 4rem;
+  }
+}
+
+/* Distance from the h1's rest position to the bar's text line, measured at each
+   step of the clamp. Below 640 the name wraps to two lines and the wrapper uses
+   py-12 rather than py-16, which is why the shortest viewport needs the most
+   travel. */
+.masthead-name {
+  --masthead-name-travel: 167px;
+}
+
+@media (min-width: 640px) {
+  .masthead-name {
+    --masthead-name-travel: 161px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masthead-name {
+    --masthead-name-travel: 155px;
   }
 }
 
@@ -257,19 +277,42 @@
   }
 }
 
+/* The shrink and the settle are two animations on one element because they
+   need different ranges: the scale finishes at 112px while the name is still
+   in clear air, the travel keeps going to 256px to set it down on the bar's
+   line. They use the individual `scale` and `translate` properties rather than
+   a `transform` shorthand for two reasons. One, a shorthand is a single
+   property, so a second animation on it would replace the first outright
+   instead of composing. Two, the used transform is Translate then Rotate then
+   Scale, which puts the translation OUTSIDE the scale, so the travel is not
+   multiplied by 0.42. Written the other way round, `scale(0.42) translateY(t)`,
+   the 155px would be scaled down to 65px and the name would stop well short of
+   the bar. transform-origin: left (set on the element) fixes where the scale
+   pivots, which keeps the left edge pinned to the column, but it does not
+   affect whether an inner translation gets scaled. */
 @keyframes masthead-name-shrink {
   to {
     /* Compositor-only. The computed font-size stays at --text-display, so the
        six-size type scale is never interpolated through. */
-    transform: scale(0.42);
-    opacity: 0;
+    scale: 0.42;
+  }
+}
+
+@keyframes masthead-name-settle {
+  to {
+    /* Counteracts scroll: the name holds its vertical position while it
+       shrinks, then comes to rest on the bar's text line exactly as the bar
+       reaches full opacity and hides it. Value is per-breakpoint because
+       --text-display is clamp(2.5rem, 7vw, 4.5rem), so the h1's height, and
+       therefore the distance to the bar, changes with viewport width. */
+    translate: 0 var(--masthead-name-travel);
   }
 }
 
 @keyframes masthead-bio-collapse {
   to {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-24px);
   }
 }
 
@@ -281,41 +324,58 @@
 
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
+    /* Ranges below are in rem, not vh, and that is deliberate. Every anchor
+       in this sequence is a fixed document offset, not a fraction of the
+       screen: the h1 sits 16px under the bar at scroll 0 and its box ends at
+       175px no matter how tall the viewport is. A vh range would overshoot
+       that anchor on a tall display and undershoot on a short one. The rail
+       and the reveals below use view(), which is viewport-relative already. */
     .masthead-bar {
       position: fixed;
       animation: masthead-bar-compress linear both;
       animation-timeline: scroll();
-      animation-range: 6rem 12rem;
+      animation-range: 7rem 16rem;
     }
 
     .masthead-bar-inner {
       animation: masthead-bar-pad linear both;
       animation-timeline: scroll();
-      animation-range: 0 12rem;
+      animation-range: 0 22rem;
     }
 
     .masthead-track {
       animation: masthead-track-reveal linear both;
       animation-timeline: scroll();
-      animation-range: 6rem 12rem;
+      animation-range: 8rem 17rem;
     }
 
     .masthead-bar-fade {
+      /* Starts at 256px, the instant the bar hits full opacity and swallows
+         the landed h1. The two copies are never legible at the same time, so
+         their differing sizes are never compared side by side. */
       animation: masthead-bar-reveal linear both;
       animation-timeline: scroll();
-      animation-range: 8rem 14rem;
+      animation-range: 16rem 23rem;
     }
 
     .masthead-name {
-      animation: masthead-name-shrink linear both;
-      animation-timeline: scroll();
-      animation-range: 0 14rem;
+      /* Two timelines, one element. The scale runs 0 -> 112px, finishing
+         while the name is still in clear air; the travel runs 0 -> 256px so the
+         name comes to rest on the bar's line at the same instant the bar's
+         background reaches full opacity and occludes it. */
+      animation:
+        masthead-name-shrink linear both,
+        masthead-name-settle linear both;
+      animation-timeline: scroll(), scroll();
+      animation-range:
+        0 7rem,
+        0 16rem;
     }
 
     .masthead-bio {
       animation: masthead-bio-collapse linear both;
       animation-timeline: scroll();
-      animation-range: 0 8rem;
+      animation-range: 0 18rem;
     }
 
     /* Reading progress spans the whole document, not the compression range. */
@@ -354,8 +414,10 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 3px;
-  width: 1px;
+  /* Centre at 6.5px, matching the 13px marker below so the marker sits ON the
+     rail rather than beside it. */
+  left: 5px;
+  width: 3px;
 }
 
 .timeline::before {
@@ -371,18 +433,24 @@
 
 .timeline-row {
   position: relative;
-  padding-left: 1.5rem;
+  /* 1.75rem, up from 1.5rem: the marker plus its ring is 19px wide now. */
+  padding-left: 1.75rem;
 }
 
-/* Marker, centred on the rail at 3.5px. Lit by default. */
+/* Marker, centred on the rail at 6.5px. Lit by default. The ring is painted
+   in the ground colour so it masks the rail passing behind, which is what makes
+   the marker read as a node ON the line instead of a dot next to it. box-shadow
+   rather than a border, so the ring costs no layout and scales with the node. */
 .timeline-row::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 2.05rem;
-  width: 7px;
-  height: 7px;
+  /* calc keeps the marker's centre where the 7px one sat. */
+  top: calc(2.05rem - 3px);
+  width: 13px;
+  height: 13px;
   background-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-ground);
 }
 
 @keyframes timeline-fill {
@@ -397,7 +465,7 @@
 @keyframes timeline-marker-light {
   from {
     background-color: var(--color-rule);
-    transform: scale(0.5);
+    transform: scale(0.35);
   }
   to {
     background-color: var(--color-accent);
@@ -413,13 +481,22 @@
     .timeline::after {
       animation: timeline-fill linear both;
       animation-timeline: view();
-      animation-range: cover 15% cover 85%;
+      /* cover 15% began the fill while the rail top was still 550px below the
+         fold, so the rail was already part-drawn before the reader reached it.
+         35% -> 80% starts as the list settles into view and completes as the
+         last row arrives, which is what makes the fill track reading position. */
+      animation-range: cover 35% cover 80%;
     }
 
     .timeline-row::before {
       animation: timeline-marker-light linear both;
       animation-timeline: view();
-      animation-range: entry 20% entry 90%;
+      /* `cover`, not `entry`. view() takes the pseudo-element itself as the
+         subject, and an `entry` range can never be longer than the subject, so
+         a 13px marker lit over 8px of scroll: a pop, while the row's own text
+         glided in over 197px. `cover` spans viewport + subject, so 5% -> 22% is
+         about 155px and the node lights just after its text settles. */
+      animation-range: cover 5% cover 22%;
     }
   }
 }
