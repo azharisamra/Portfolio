@@ -2,8 +2,8 @@
  * Every knob for the "Ask about my experience" feature, in one place.
  *
  * Provider: Google Gemini, free tier (no card required). Only two lines in the
- * codebase are provider-specific — this constant and the import in the route
- * handler — because everything runs through the Vercel AI SDK. Moving to
+ * codebase are provider-specific - this constant and the import in the route
+ * handler - because everything runs through the Vercel AI SDK. Moving to
  * Anthropic or OpenAI later is a package swap plus those two lines.
  *
  * Free-tier limits are low and shared, so expect occasional upstream 429s
@@ -12,7 +12,7 @@
  * `flash` rather than `flash-lite`: the whole value of this feature is the
  * model refusing to invent experience, and that is instruction-following work.
  *
- * Pinned to an explicit version rather than the `gemini-flash-latest` alias —
+ * Pinned to an explicit version rather than the `gemini-flash-latest` alias -
  * an alias can move under you and change refusal behaviour without a deploy.
  */
 export const ASK_MODEL = "gemini-3.6-flash" as const;
@@ -22,7 +22,7 @@ export const ASK_MODEL = "gemini-3.6-flash" as const;
  *
  * Gemini 3.x bills thinking tokens against this budget, so a tight cap starves
  * the visible answer and truncates it mid-sentence. Raised to 800 and paired
- * with thinkingLevel "minimal" below — the answer itself is 2-4 sentences, so
+ * with thinkingLevel "minimal" below - the answer itself is 2-4 sentences, so
  * the extra headroom is spent on reasoning, not length.
  */
 export const MAX_OUTPUT_TOKENS = 800;
@@ -39,7 +39,7 @@ export const THINKING_LEVEL = "minimal" as const;
  */
 export const MAX_QUESTION_CHARS = 500;
 
-/** Per-IP allowance. Best-effort — see rate-limit.ts for what that means. */
+/** Per-IP allowance. Best-effort - see rate-limit.ts for what that means. */
 export const IP_LIMIT = 5;
 export const IP_WINDOW_MS = 10 * 60 * 1000;
 

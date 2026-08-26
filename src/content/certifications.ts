@@ -4,7 +4,7 @@ export interface Certification {
   /** Human-readable, matching the site's date format, e.g. "Nov 2022". */
   date: string;
   /**
-   * Verification link. Omit entirely until a real one exists — a card with no
+   * Verification link. Omit entirely until a real one exists - a card with no
    * link is better than a link that goes nowhere.
    */
   credentialUrl?: string;

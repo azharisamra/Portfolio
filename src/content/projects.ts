@@ -10,11 +10,11 @@ export interface ProjectImage {
 export interface Project {
   slug: string;
   title: string;
-  /** Human-readable, e.g. "Jun – Aug 2023". */
+  /** Human-readable, e.g. "Jul 2025". */
   timeframe: string;
   /**
    * The problem this solves for a person, in one sentence, naming no
-   * technology. First draft — rewrite the wording.
+   * technology. First draft - rewrite the wording.
    */
   problem: string;
   description: string;
@@ -53,7 +53,7 @@ export const projects: readonly Project[] = [
     // Rewritten to match the deployed site, which is an AI image-generation
     // product rather than the artist showcase this previously described.
     problem:
-      "Wanting a specific image and having no way to make it — hiring an illustrator costs more than the idea is worth, and stock libraries never have the exact thing.",
+      "Wanting a specific image and having no way to make it. Hiring an illustrator costs more than the idea is worth, and stock libraries never have the exact thing.",
     description:
       "Marketing site for an AI image-generation product, with hero, features, how-it-works, gallery and pricing sections. Built with Next.js and Framer Motion.",
     stack: ["Next.js", "Framer Motion"],

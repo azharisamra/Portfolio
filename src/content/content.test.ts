@@ -130,6 +130,31 @@ describe("education and certifications", () => {
   });
 });
 
+describe("house style", () => {
+  const DASHES = /[\u2014\u2013]/;
+
+  it("uses no em or en dashes in any visible string", () => {
+    const strings: [string, string][] = [
+      ...Object.entries(profile).map(
+        ([k, v]) => [`profile.${k}`, String(v)] as [string, string],
+      ),
+      ...projects.flatMap((p) => [
+        [`${p.slug}.problem`, p.problem] as [string, string],
+        [`${p.slug}.description`, p.description] as [string, string],
+        [`${p.slug}.timeframe`, p.timeframe] as [string, string],
+      ]),
+      ...experience.flatMap((r) =>
+        r.bullets.map((b) => [r.company, b] as [string, string]),
+      ),
+      ...education.map((e) => [e.degree, e.institution] as [string, string]),
+      ...certifications.map((c) => [c.name, c.issuer] as [string, string]),
+    ];
+    for (const [where, value] of strings) {
+      expect(value, where).not.toMatch(DASHES);
+    }
+  });
+});
+
 describe("skills", () => {
   it("has no empty groups and no duplicated entries", () => {
     const seen = new Set<string>();

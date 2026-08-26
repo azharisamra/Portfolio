@@ -27,6 +27,14 @@ const fail = (
   return Response.json(body, { status, headers });
 };
 
+/**
+ * The model is instructed not to emit em or en dashes, but an instruction is
+ * not a guarantee. Stripping them on the way out makes the house style hold
+ * for copy that is generated at request time rather than written by hand.
+ */
+const stripDashes = (chunk: string): string =>
+  chunk.replace(/[\u2014\u2013]/g, "-");
+
 export async function POST(request: Request): Promise<Response> {
   if (!isAskEnabled()) {
     return fail(
@@ -65,7 +73,7 @@ export async function POST(request: Request): Promise<Response> {
     const message =
       limit.reason === "daily_limit"
         ? "This panel has hit its daily question limit. Try again tomorrow, or email Samra directly."
-        : "That's a few questions in quick succession — give it a minute.";
+        : "That's a few questions in quick succession. Give it a minute.";
     return fail(limit.reason, message, 429, {
       "Retry-After": String(limit.retryAfter),
     });
@@ -96,7 +104,7 @@ export async function POST(request: Request): Promise<Response> {
    * toTextStreamResponse() directly would therefore send 200 + an empty body
    * for a hard failure, and the client would report it as "empty response".
    *
-   * Pulling the first chunk here keeps the status code honest — everything
+   * Pulling the first chunk here keeps the status code honest - everything
    * after it still streams normally.
    */
   const iterator = result.textStream[Symbol.asyncIterator]();
@@ -132,12 +140,12 @@ export async function POST(request: Request): Promise<Response> {
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
-      controller.enqueue(encoder.encode(first.value));
+      controller.enqueue(encoder.encode(stripDashes(first.value)));
       try {
         for (;;) {
           const next = await iterator.next();
           if (next.done) break;
-          controller.enqueue(encoder.encode(next.value));
+          controller.enqueue(encoder.encode(stripDashes(next.value)));
         }
       } catch (error) {
         // Headers are already sent, so the caller keeps whatever streamed.

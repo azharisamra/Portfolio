@@ -52,7 +52,7 @@
   --container-measure: 65ch;
 }
 
-/* Light — the default. */
+/* Light - the default. */
 :root {
   --ground: #fafaf9;
   --surface: #e7e5e4;
@@ -141,7 +141,7 @@
 
    Uses a CSS scroll-driven animation rather than an IntersectionObserver, so
    the sections that use it stay Server Components with no client JS. Browsers
-   without `animation-timeline` simply render the content in its final state —
+   without `animation-timeline` simply render the content in its final state -
    the @supports guard means there is no hidden-forever failure mode. */
 @keyframes reveal-in {
   from {

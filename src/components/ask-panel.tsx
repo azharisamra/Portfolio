@@ -47,7 +47,7 @@ export function AskPanel() {
           const body = (await response.json()) as AskErrorBody;
           if (typeof body.message === "string") message = body.message;
         } catch {
-          // Non-JSON error body — keep the generic message.
+          // Non-JSON error body - keep the generic message.
         }
         setErrorText(message);
         setStatus("error");

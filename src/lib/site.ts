@@ -11,7 +11,7 @@ export const SITE_URL = configured ?? "https://samraazhari.netlify.app";
 
 /**
  * Mirrors the light/dark tokens in globals.css. Satori cannot read CSS custom
- * properties, so the OG image needs literal values. Keep in sync by hand —
+ * properties, so the OG image needs literal values. Keep in sync by hand -
  * these are the only hard-coded colours in the codebase.
  */
 export const OG_COLORS = {

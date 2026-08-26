@@ -7,4 +7,4 @@ export const displayUrl = (url: string): string =>
  * current, so it reads "Present" rather than being left open.
  */
 export const formatRange = (start: string, end: string | null): string =>
-  `${start} — ${end ?? "Present"}`;
+  `${start} to ${end ?? "Present"}`;

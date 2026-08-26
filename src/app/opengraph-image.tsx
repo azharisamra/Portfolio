@@ -3,7 +3,7 @@ import { profile } from "@/content";
 import { OG_COLORS } from "@/lib/site";
 import { displayUrl } from "@/lib/format";
 
-export const alt = `${profile.name} — ${profile.headline}`;
+export const alt = `${profile.name} | ${profile.headline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -29,7 +29,7 @@ export function SiteHeader() {
       text: displayUrl(profile.linkedinUrl),
       external: true,
     },
-    // Rendered only when a real URL exists — an empty resumeUrl produces no
+    // Rendered only when a real URL exists - an empty resumeUrl produces no
     // row rather than a dead link.
     ...(profile.resumeUrl
       ? [
