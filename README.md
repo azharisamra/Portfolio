@@ -10,6 +10,7 @@ Personal portfolio and CV site. Live at **<https://samraazhari.netlify.app>**.
 - React 19, TypeScript in strict mode
 - Tailwind CSS v4, configured CSS-first via a single `@theme` block
 - Vercel AI SDK with the Google provider (Gemini)
+- Vitest for unit tests
 - Deployed on Netlify
 
 ## Notable implementation details
@@ -84,7 +85,8 @@ npm run dev           # http://localhost:3000
 npm run build         # production build
 npm run start         # serve the production build
 
-npm run typecheck     # tsc --noEmit
+npm test              # vitest run
+npm run typecheck     # next typegen && tsc --noEmit
 npm run lint          # eslint
 npm run format        # prettier --write
 npm run format:check  # prettier --check
