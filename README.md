@@ -44,6 +44,18 @@ location from `src/content/profile.ts`. A social preview generated from the same
 source as the page cannot drift out of sync with it, which is the usual failure
 mode for a hand-exported PNG.
 
+**Scroll choreography runs on CSS scroll-driven animations, not JavaScript.**
+The masthead compression and the Experience rail both use `animation-timeline`
+(`scroll()` for the pinned bar, `view()` for the rail and its per-row markers),
+so the components that carry them stay Server Components and the effects add
+zero bytes of client JavaScript. Every rule sits inside `@supports` and
+`prefers-reduced-motion: no-preference`, and the unanimated declaration is the
+finished state rather than the empty one, so a browser without scroll timelines
+renders a full masthead and a fully drawn rail instead of a blank one. The name
+shrinks via `transform: scale()` rather than an animated `font-size`, which
+keeps the six-value type scale from being interpolated through and keeps the
+work off the layout path.
+
 **Theming is flash-free and toggle-driven.** A small blocking script in `<head>`
 reads the stored preference and sets a class on `<html>` before first paint, so
 the correct theme is present in the first frame rather than applied after
