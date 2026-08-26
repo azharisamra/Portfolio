@@ -26,7 +26,7 @@ const barlowCondensed = Barlow_Condensed({
   // layout from shifting when the real font swaps in.
 });
 
-const siteTitle = `${profile.name} — ${profile.headline}`;
+const siteTitle = `${profile.name} | ${profile.headline}`;
 
 export const metadata: Metadata = {
   // Makes every relative URL below absolute, including the generated OG image.

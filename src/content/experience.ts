@@ -12,7 +12,7 @@ export interface Role {
 /**
  * Titles, companies, locations and dates come from the brief.
  *
- * The bullets do NOT — the brief lists no role descriptions. They are drafted
+ * The bullets do NOT - the brief lists no role descriptions. They are drafted
  * from your resume PDF, which the brief names as the source of truth for this
  * section. Every figure in them ("30%", "20%", "4+") is yours, from that
  * document; none was invented here. Review before shipping.
@@ -62,7 +62,7 @@ export const experience: readonly Role[] = [
     location: "Mumbai",
     startDate: "Oct 2020",
     endDate: "May 2021",
-    // TODO(samra): same as above — one resume bullet, split into two.
+    // TODO(samra): same as above - one resume bullet, split into two.
     bullets: [
       "Maintained and extended the company website, implementing responsive layouts across breakpoints.",
       "Applied SEO optimisations to improve user engagement.",

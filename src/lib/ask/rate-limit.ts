@@ -1,7 +1,7 @@
 import { DAILY_LIMIT, IP_LIMIT, IP_WINDOW_MS } from "./config";
 
 /**
- * IMPORTANT — what this does and does not guarantee.
+ * IMPORTANT - what this does and does not guarantee.
  *
  * State lives in the module scope of one serverless instance. Netlify may run
  * several instances concurrently and recycles them on cold start, so:

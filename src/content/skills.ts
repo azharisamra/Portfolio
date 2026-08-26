@@ -3,7 +3,7 @@ export interface SkillGroup {
   items: readonly string[];
 }
 
-/** Mirrors the STACK section of the brief exactly — same groups, same order. */
+/** Mirrors the STACK section of the brief exactly - same groups, same order. */
 export const skills: readonly SkillGroup[] = [
   {
     category: "Languages",

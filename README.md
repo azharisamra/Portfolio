@@ -1,4 +1,4 @@
-# Samra Hifzur Rahman — Portfolio
+# Samra Hifzur Rahman, Portfolio
 
 Personal portfolio and CV site. Live at **<https://samraazhari.netlify.app>**.
 
@@ -20,16 +20,16 @@ assembles its system prompt from the content modules at request time rather than
 from a hand-written description, so an answer cannot claim experience the site
 does not list. The prompt instructs the model to state plainly when something is
 absent instead of hedging, and refuses to inflate a single mention into "extensive
-experience". Requests are bounded on four axes — input length, output tokens,
-per-IP rate, and a global daily cap — because the endpoint is public and every
+experience". Requests are bounded on four axes (input length, output tokens,
+per-IP rate, and a global daily cap) because the endpoint is public and every
 call costs money. See `src/lib/ask/`.
 
 **Streaming errors are reported with honest status codes.** `streamText` is lazy:
 returning its response directly means an upstream failure arrives after the HTTP
 headers have already been sent, so an authentication error reaches the browser as
 `200 OK` with an empty body. The route pulls the first chunk before committing a
-status, and captures provider errors through `onError` — which the SDK uses
-instead of throwing — so an API failure is distinguishable from a genuinely empty
+status, and captures provider errors through `onError`, which the SDK uses
+instead of throwing, so an API failure is distinguishable from a genuinely empty
 completion. Everything after the first token still streams.
 
 **Content lives in typed modules, not in components.** Every string on the page is
@@ -49,8 +49,8 @@ reads the stored preference and sets a class on `<html>` before first paint, so
 the correct theme is present in the first frame rather than applied after
 hydration. Both palettes are CSS custom properties consumed through Tailwind's
 `@theme inline`, so one set of utilities serves both. The control is a
-`role="radiogroup"` with a roving tabindex — one tab stop, arrow-key navigation —
-and reads `localStorage` through `useSyncExternalStore` rather than copying it
+`role="radiogroup"` with a roving tabindex, giving one tab stop and arrow-key
+navigation, and it reads `localStorage` through `useSyncExternalStore` rather than copying it
 into state inside an effect.
 
 ## Local setup
@@ -94,9 +94,9 @@ npm run format:check  # prettier --check
 
 ## Architecture
 
-Site content is exported from `src/content/` as typed TypeScript modules —
+Site content is exported from `src/content/` as typed TypeScript modules,
 `profile.ts`, `experience.ts`, `projects.ts`, `education.ts`, `certifications.ts`,
-`skills.ts` — rather than being written into JSX or loaded from JSON.
+`skills.ts`, rather than being written into JSX or loaded from JSON.
 
 Components receive data; they do not contain facts. A section is a rendering
 decision, and the content it renders is a separate, independently reviewable
@@ -121,5 +121,5 @@ A project without a live URL renders without a link rather than with a placehold
 that 404s. That constraint is what makes it safe to commit an incomplete entry.
 
 The Q&A endpoint is the clearest payoff. Because its grounding context is built
-from the same modules the page renders, the answers and the page cannot disagree
-— editing `experience.ts` changes both in one step.
+from the same modules the page renders, the answers and the page cannot disagree.
+Editing `experience.ts` changes both in one step.

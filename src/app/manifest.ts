@@ -4,7 +4,7 @@ import { OG_COLORS } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${profile.name} — ${profile.headline}`,
+    name: `${profile.name} | ${profile.headline}`,
     // Derived, not hard-coded: manifests want a short label.
     short_name: profile.name.split(" ")[0],
     description: profile.metaDescription,

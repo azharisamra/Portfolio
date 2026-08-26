@@ -3,7 +3,7 @@ export const THEME_STORAGE_KEY = "theme";
 export const THEMES = ["light", "system", "dark"] as const;
 
 export type Theme = (typeof THEMES)[number];
-/** What actually gets applied to the document — "system" resolves to one of these. */
+/** What actually gets applied to the document - "system" resolves to one of these. */
 export type ResolvedTheme = "light" | "dark";
 
 export const isTheme = (value: unknown): value is Theme =>

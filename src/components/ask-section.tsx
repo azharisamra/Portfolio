@@ -4,7 +4,7 @@ import { isAskEnabled } from "@/lib/ask/config";
 
 /**
  * Server Component gate. With no GOOGLE_GENERATIVE_AI_API_KEY set, this renders nothing
- * at all — no section heading, no client JS — and the rest of the page is
+ * at all - no section heading, no client JS - and the rest of the page is
  * unaffected.
  */
 export function AskSection() {
