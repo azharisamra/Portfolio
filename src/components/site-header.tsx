@@ -45,11 +45,13 @@ export function SiteHeader() {
 
   return (
     <header className="border-b-2 border-ink pb-8">
-      {/* Pinned masthead bar. In flow it contributes nothing, so the header
-          below keeps its natural height at every width and no spacer is
-          needed. At scroll 0 it is transparent and shows only the toggle, in
-          the same place the toggle sits today. */}
-      <div className="masthead-bar fixed inset-x-0 top-0 z-50">
+      {/* Pinned masthead bar. Out of flow, so the header below keeps its
+          natural height at every width and no spacer is needed. At scroll 0 it
+          is transparent and shows only the toggle, in the same place the toggle
+          sits today. `position` is set in globals.css rather than here: it is
+          only `fixed` where the scroll animation that gives it a background
+          runs, and `absolute` otherwise. */}
+      <div className="masthead-bar inset-x-0 top-0 z-50">
         <div className="masthead-bar-inner mx-auto flex max-w-3xl items-center gap-4 px-5 sm:px-8">
           <p className="masthead-bar-fade truncate font-condensed text-label uppercase">
             {profile.name}

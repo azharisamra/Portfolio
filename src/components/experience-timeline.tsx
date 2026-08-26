@@ -5,14 +5,14 @@ import { Section } from "@/components/section";
 export function ExperienceTimeline() {
   return (
     <Section id="experience" title="Experience">
-      <ol className="mt-2">
+      <ol className="timeline mt-2">
         {experience.map((role) => {
           const isCurrent = role.endDate === null;
 
           return (
             <li
               key={`${role.company}-${role.startDate}`}
-              className="reveal-on-scroll border-b border-rule py-6 first:border-t"
+              className="timeline-row reveal-on-scroll py-6"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <span className="font-condensed text-label text-muted uppercase tabular-nums">
@@ -28,7 +28,7 @@ export function ExperienceTimeline() {
               <h3 className="mt-2 font-condensed text-lead uppercase">
                 {role.title}
               </h3>
-              <p className="text-meta text-accent">
+              <p className="text-meta text-ink">
                 {role.company} · {role.location}
               </p>
 

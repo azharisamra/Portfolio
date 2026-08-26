@@ -207,8 +207,16 @@
 }
 
 /* Full state: no background, and the bar's own text hidden so only the toggle
-   shows. This is what unsupported browsers and reduced-motion users get. */
+   shows. This is what unsupported browsers and reduced-motion users get.
+
+   Position lives here rather than as a `fixed` utility in the JSX. The bar only
+   earns `fixed` inside the guard below, because the background it needs to sit
+   over body text is supplied by the scroll animation. Without that animation a
+   fixed bar is transparent, so the toggle would float over the article text as
+   the reader scrolls. Absolute pins it to the document top instead, so it
+   scrolls away with the page exactly as the header did before this existed. */
 .masthead-bar {
+  position: absolute;
   background-color: transparent;
 }
 
@@ -274,6 +282,7 @@
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
     .masthead-bar {
+      position: fixed;
       animation: masthead-bar-compress linear both;
       animation-timeline: scroll();
       animation-range: 6rem 12rem;
@@ -313,6 +322,104 @@
     .masthead-progress {
       animation: masthead-progress-fill linear both;
       animation-timeline: scroll();
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Experience rail
+
+   Same contract as .reveal-on-scroll: the UNANIMATED state is the finished
+   one. Without scroll timelines, or under reduced motion, the rail is fully
+   drawn and every marker is lit. Safari never shows a blank rail and four
+   dead dots.
+
+   The rail hangs off the <ol>, not the Section wrapper, so it starts at the
+   first role rather than beside the "Experience" heading.
+
+   The marker lives on li::before rather than on the <li>. The <li> already
+   carries .reveal-on-scroll, whose `animation` shorthand would be replaced
+   outright by a second rule on the same element. A pseudo-element has its own
+   animation, timeline and range, so the two cannot collide.
+   --------------------------------------------------------------------------- */
+
+.timeline {
+  position: relative;
+}
+
+/* Track and fill, both anchored to the list box. */
+.timeline::before,
+.timeline::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 3px;
+  width: 1px;
+}
+
+.timeline::before {
+  background-color: var(--color-rule);
+}
+
+.timeline::after {
+  background-color: var(--color-accent);
+  transform-origin: top;
+  /* Fully drawn by default. */
+  transform: scaleY(1);
+}
+
+.timeline-row {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+/* Marker, centred on the rail at 3.5px. Lit by default. */
+.timeline-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2.05rem;
+  width: 7px;
+  height: 7px;
+  background-color: var(--color-accent);
+}
+
+@keyframes timeline-fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes timeline-marker-light {
+  from {
+    background-color: var(--color-rule);
+    transform: scale(0.5);
+  }
+  to {
+    background-color: var(--color-accent);
+    transform: scale(1);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* view(), not scroll(): scroll() ranges are expressed against the document
+       scroller, so the fill could not be tied to this list's extent without
+       hardcoding pixel offsets. */
+    .timeline::after {
+      animation: timeline-fill linear both;
+      animation-timeline: view();
+      animation-range: cover 15% cover 85%;
+    }
+
+    .timeline-row::before {
+      animation: timeline-marker-light linear both;
+      animation-timeline: view();
+      animation-range: entry 20% entry 90%;
     }
   }
 }
