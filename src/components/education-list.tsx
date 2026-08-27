@@ -8,7 +8,7 @@ export function EducationList() {
         {education.map((item) => (
           <li
             key={item.degree}
-            className="reveal-on-scroll grid gap-1 border-b border-rule py-5 first:border-t sm:grid-cols-[7rem_1fr] sm:items-baseline sm:gap-6"
+            className="rule-row reveal-on-scroll grid gap-1 py-5 sm:grid-cols-[7rem_1fr] sm:items-baseline sm:gap-6"
           >
             <span className="font-condensed text-label text-muted uppercase tabular-nums">
               {item.year}

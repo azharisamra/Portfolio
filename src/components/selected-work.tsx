@@ -1,7 +1,22 @@
 import Image from "next/image";
 import { projects } from "@/content";
-import type { Project } from "@/content";
+import type { Project, ProjectImage } from "@/content";
 import { Section } from "@/components/section";
+
+/**
+ * One entry per screenshot a project renders. A project whose subject has both
+ * themes yields two, tagged so CSS can show whichever matches the reader's
+ * theme; every other project yields one, shown in both. The switch is class
+ * driven, never prefers-color-scheme - see globals.css for why.
+ */
+function shotsFor(project: Project): { image: ProjectImage; theme: string }[] {
+  if (!project.image) return [];
+  if (!project.imageDark) return [{ image: project.image, theme: "" }];
+  return [
+    { image: project.image, theme: "shot-light" },
+    { image: project.imageDark, theme: "shot-dark" },
+  ];
+}
 
 /**
  * Card and panel deliberately share one `sizes`. At 1024px and up both copies
@@ -41,16 +56,17 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
 
       <p className="mt-3 text-lead text-ink">{project.problem}</p>
 
-      {project.image ? (
+      {shotsFor(project).map((shot) => (
         <Image
-          src={project.image.src}
-          alt={project.image.alt}
-          width={project.image.width}
-          height={project.image.height}
+          key={shot.image.src}
+          src={shot.image.src}
+          alt={shot.image.alt}
+          width={shot.image.width}
+          height={shot.image.height}
           sizes={SHOT_SIZES}
-          className="work-card-shot mt-6 h-auto w-full border border-rule"
+          className={`work-card-shot ${shot.theme} mt-6 h-auto w-full border border-rule`}
         />
-      ) : null}
+      ))}
 
       <p className="mt-6 text-meta text-muted">{project.description}</p>
 
@@ -90,8 +106,13 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
 
 export function SelectedWork() {
   const featured = projects.filter((project) => project.featured);
-  const shots = featured.flatMap((project) =>
-    project.image ? [{ slug: project.slug, image: project.image }] : [],
+  const panelShots = featured.flatMap((project, index) =>
+    shotsFor(project).map((shot) => ({
+      key: shot.image.src,
+      image: shot.image,
+      theme: shot.theme,
+      shotClass: SHOT_CLASS[index] ?? "",
+    })),
   );
 
   return (
@@ -102,15 +123,15 @@ export function SelectedWork() {
             screen reader hears it in context rather than as three loose images
             stacked in a panel. */}
         <div className="work-panel" aria-hidden="true">
-          {shots.map((shot, index) => (
+          {panelShots.map((shot) => (
             <Image
-              key={shot.slug}
+              key={shot.key}
               src={shot.image.src}
               alt=""
               width={shot.image.width}
               height={shot.image.height}
               sizes={SHOT_SIZES}
-              className={`work-shot ${SHOT_CLASS[index] ?? ""}`}
+              className={`work-shot ${shot.shotClass} ${shot.theme}`}
             />
           ))}
         </div>

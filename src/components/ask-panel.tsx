@@ -111,7 +111,7 @@ export function AskPanel() {
             setQuestion(event.target.value);
           }}
           placeholder="Has she worked with AWS?"
-          className="placeholder:text-fg-subtle min-w-0 flex-1 bg-transparent text-body outline-none"
+          className="min-w-0 flex-1 bg-transparent text-body placeholder:text-muted"
           aria-describedby="ask-hint"
         />
         <button
