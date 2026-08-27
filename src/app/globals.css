@@ -516,3 +516,130 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Pinned project viewer
+
+   At 1024px and up Selected Work becomes two columns: a screenshot panel
+   pinned to the viewport on the left, the write-ups scrolling past it on the
+   right. Each card drives the panel, so the image on screen is always the one
+   being read about.
+
+   The timelines are NAMED, not anonymous, and that is forced rather than
+   chosen. `animation-timeline: view()` makes the animated element its own
+   subject, and the panel's images are pinned - their view progress stalls the
+   moment they stick, so they cannot drive themselves. The cards are ordinary
+   in-flow elements with well-defined view progress, so each card publishes a
+   `view-timeline-name` and the panel's images subscribe to it. Reaching a
+   timeline declared on a cousin needs `timeline-scope` on the common ancestor,
+   which is why it is part of the @supports test below: a browser with view()
+   but without timeline-scope would leave the names unresolvable and strand the
+   panel on one image, which is exactly the failure the guard exists to stop.
+
+   The panel declares no z-index on purpose. It is a positioned element with
+   z-index: auto, so it paints in the auto/0 layer and the masthead bar's z-50
+   always wins. top: 5rem is the same offset as the scroll-padding-top already
+   used for the bar, and clears its 60px compact height with room to spare.
+
+   Base state, and what every fallback keeps: no panel, no grid, no breakout,
+   each screenshot inline in its own card exactly as the section renders today.
+   --------------------------------------------------------------------------- */
+
+.work-panel {
+  display: none;
+}
+
+@keyframes work-shot-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) and (timeline-scope: --x) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    /* Breaking the column is the point of the section, so the heading rule
+       widens with it. min() against the viewport means it can never overflow:
+       at exactly 1024px wide the section is 960px, not 1024px. */
+    .section-wide {
+      --section-wide-width: min(72rem, calc(100vw - 4rem));
+      width: var(--section-wide-width);
+      margin-left: calc((100% - var(--section-wide-width)) / 2);
+    }
+
+    .work-viewer {
+      display: grid;
+      grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
+      gap: 3rem;
+      timeline-scope: --work-1, --work-2, --work-3;
+    }
+
+    .work-panel {
+      display: block;
+      position: sticky;
+      top: 5rem;
+      align-self: start;
+      aspect-ratio: 1408 / 880;
+      border: 1px solid var(--color-rule);
+    }
+
+    .work-shot {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    /* The first shot is the resting image and never animates. The others fade
+       in over it and never fade out, so the panel is never empty and there is
+       no seam between one shot leaving and the next arriving. Which one wins is
+       just DOM order. */
+    .work-shot-2,
+    .work-shot-3 {
+      opacity: 0;
+    }
+
+    .work-card-1 {
+      view-timeline-name: --work-1;
+    }
+
+    .work-card-2 {
+      view-timeline-name: --work-2;
+    }
+
+    .work-card-3 {
+      view-timeline-name: --work-3;
+    }
+
+    /* Per-project ranges, because the cards are not the same height (451,
+       390 and 341px at 1024 and up) and a shared percentage would land the
+       swap in a different place for each. Both are tuned so the shot reaches
+       full opacity as its card's heading arrives level with the panel, not
+       before: an earlier finish leaves you reading project two beside the
+       image for project three. */
+    .work-shot-2 {
+      animation: work-shot-in linear both;
+      animation-timeline: --work-2;
+      animation-range: cover 48% cover 64%;
+    }
+
+    .work-shot-3 {
+      animation: work-shot-in linear both;
+      animation-timeline: --work-3;
+      animation-range: cover 50% cover 66%;
+    }
+
+    /* Clipped, not removed. The panel is aria-hidden, so this is the copy a
+       screen reader reads, and it has to stay in the tree beside its own
+       heading. display: none would take it out of both. */
+    .work-card-shot {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      border-width: 0;
+    }
+  }
+}
