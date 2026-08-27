@@ -4,8 +4,22 @@ import { Section } from "@/components/section";
 
 export function ContactSection() {
   const socials = [
-    { label: "GitHub", href: profile.githubUrl },
-    { label: "LinkedIn", href: profile.linkedinUrl },
+    {
+      label: "GitHub",
+      href: profile.githubUrl,
+      text: displayUrl(profile.githubUrl),
+    },
+    {
+      label: "LinkedIn",
+      href: profile.linkedinUrl,
+      text: displayUrl(profile.linkedinUrl),
+    },
+    // Moved here when the hero's duplicate contact list was removed. Still
+    // rendered only when a real URL exists, so an empty resumeUrl produces no
+    // row rather than a dead link.
+    ...(profile.resumeUrl
+      ? [{ label: "Resume", href: profile.resumeUrl, text: "Download PDF" }]
+      : []),
   ];
 
   return (
@@ -34,7 +48,7 @@ export function ContactSection() {
                 rel="noreferrer"
                 className="text-body break-words"
               >
-                {displayUrl(social.href)}
+                {social.text}
               </a>
             </li>
           ))}

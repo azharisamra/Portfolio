@@ -179,4 +179,21 @@ describe("pinned project viewer", () => {
     );
     expect(shots).toHaveLength(3);
   });
+
+  // The two variants occupy the same box and swap with display, so a size
+  // mismatch would change the layout when the reader flips the theme.
+  it("gives every dark screenshot the same dimensions as its light one", () => {
+    for (const project of projects) {
+      if (!project.imageDark) continue;
+      expect(project.image).toBeDefined();
+      expect(project.imageDark.width).toBe(project.image?.width);
+      expect(project.imageDark.height).toBe(project.image?.height);
+    }
+  });
+
+  it("never pairs a dark screenshot with a missing light one", () => {
+    for (const project of projects) {
+      if (project.imageDark) expect(project.image).toBeDefined();
+    }
+  });
 });

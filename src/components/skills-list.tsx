@@ -10,7 +10,7 @@ export function SkillsList() {
         {skills.map((group) => (
           <div
             key={group.category}
-            className="reveal-on-scroll grid gap-1 border-b border-rule py-4 first:border-t sm:grid-cols-[10rem_1fr] sm:items-baseline sm:gap-6"
+            className="rule-row reveal-on-scroll grid gap-1 py-4 sm:grid-cols-[10rem_1fr] sm:items-baseline sm:gap-6"
           >
             <dt className="font-condensed text-label text-muted uppercase">
               {group.category}

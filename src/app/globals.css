@@ -44,7 +44,10 @@
   --text-section--line-height: 1.15;
   --text-section--letter-spacing: -0.01em;
 
-  --text-display: clamp(2.5rem, 7vw, 4.5rem);
+  /* Sized to fill the wide frame, not the reading measure. The cap is set so
+     the longest line of the name still fits 1152px; content.test.ts cannot
+     check that, so it is verified by measurement. */
+  --text-display: clamp(2.5rem, 10vw, 9rem);
   --text-display--line-height: 0.95;
   --text-display--letter-spacing: -0.02em;
 
@@ -81,11 +84,29 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Anchor jumps must clear the pinned bar rather than land under it. */
+    /* Anchor jumps must clear the pinned bar rather than land under it.
+       
+       Measured against the bar's COMPACT height, 60px, not its height at
+       scroll 0, which is 92px on mobile and 108px above 640. The difference
+       matters and the tall figure is the tempting one to use, so: the bar's
+       padding animates 4rem down to 1rem over 0 -> 78vh, and every anchor on
+       this page sits below a 100svh hero. By the time a jump lands, the bar
+       has always finished compacting. The tall state only exists at scroll 0,
+       where there is nothing to clear because you are already at the top.
+       
+       5rem is therefore 60px of bar plus 20px of air. Raising it to match the
+       scroll-0 height would push every anchor 11-27px further down for no
+       benefit. Verified by navigating to each anchor: clearance is positive at
+       375x667 and 1280x800, and in the reduced-motion fallback the bar is
+       absolute and scrolls away entirely.
+       
+       The margin holds while 22vh >= 80px, so for any viewport taller than
+       about 364px. At 360, the shortest realistic case, the bar is 99.6%
+       compacted. */
     scroll-padding-top: 5rem;
   }
 
-  /* The skip link's target. Matches the compact bar height plus a little air. */
+  /* The skip link's target. Same reasoning and the same number as above. */
   #main-content {
     scroll-margin-top: 5rem;
   }
@@ -148,6 +169,32 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Two measures
+
+   The page has exactly two widths and they mean different things.
+
+   The READING measure is the 48rem page wrapper. Everything made of sentences
+   lives in it, because a 1152px line of body copy is unreadable.
+
+   The WIDE frame is for things that are not sentences: display type, and the
+   pinned project viewer. It exists in more than one place on purpose. A single
+   wide section under an otherwise narrow page reads as a mistake; the same
+   width used twice, always for the same reason, reads as a system.
+
+   min() against the viewport means it can never overflow: at exactly 1024px
+   wide the frame is 960px, not 1152px. Below 1024 there is only one measure
+   and .frame-wide is inert.
+   --------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .frame-wide {
+    --frame-wide: min(72rem, calc(100vw - 4rem));
+    width: var(--frame-wide);
+    margin-left: calc((100% - var(--frame-wide)) / 2);
+  }
+}
+
 /* The single scroll reveal on the site.
 
    Uses a CSS scroll-driven animation rather than an IntersectionObserver, so
@@ -171,6 +218,174 @@
       animation: reveal-in linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero
+
+   The hero owns the first screen. min-height uses svh, not vh, so it is the
+   *small* viewport height on mobile: with vh the browser chrome would overlap
+   the bottom of the hero whenever the URL bar is expanded.
+
+   The name and role sit in the wide frame; the bio and contact list drop back
+   to the reading measure. That mix is the point of having two measures, and it
+   is why the frame is not just a wider page.
+
+   margin-top: auto on the lower block pushes the reading column to the foot of
+   the screen, so the hero has a deliberate bottom edge rather than running out.
+   --------------------------------------------------------------------------- */
+
+.hero-inner {
+  /* The hero sits inside the page wrapper's top padding, so a plain 100svh
+     overshoots the fold by exactly that padding and pushes the last contact
+     row off screen. Subtract it, and the hero plus the padding above it come
+     to one screen. The vh line is a fallback for engines without svh; where
+     svh is supported the second declaration wins. */
+  --hero-offset: 3rem;
+  display: flex;
+  min-height: calc(100vh - var(--hero-offset));
+  min-height: calc(100svh - var(--hero-offset));
+  flex-direction: column;
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .hero-inner {
+    --hero-offset: 4rem;
+  }
+}
+
+/* No spacer any more. While the hero carried a contact list there was a lower
+   block worth pushing to the foot of the screen; with only the bio left, doing
+   that stranded one paragraph mid-screen with air above AND below it. The
+   masthead now reads as one group at the top, and the leftover height falls
+   below it where the 2px rule closes the screen. */
+
+.hero-measure {
+  max-width: 44rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero entrance
+
+   The one animation on the site that is not scroll driven, and the only place
+   anything moves at load. Two rules keep it honest:
+
+   Nothing fades text in. Every text element animates transform only and stays
+   fully opaque, so the name is painted and readable in the first frame and the
+   largest-contentful-paint element is never hidden behind an animation. Only
+   the rules, which carry no words, scale from nothing.
+
+   The unanimated state is the finished state, as everywhere else: no rule
+   below sets a resting transform, so with animations off the hero is simply
+   laid out and drawn.
+   --------------------------------------------------------------------------- */
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(18px);
+  }
+}
+
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    animation: hero-rise 560ms cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+  }
+
+  .hero-rise-2 {
+    animation-delay: 80ms;
+  }
+
+  .hero-rise-3 {
+    animation-delay: 150ms;
+  }
+
+  .hero-rise-4 {
+    animation-delay: 220ms;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Rules that draw
+
+   Every horizontal rule on the page is a pseudo-element rather than a border,
+   because a border cannot be scaled. The resting state is a fully drawn line,
+   so with animations off, or without scroll timelines, the page is simply
+   ruled exactly as it was.
+
+   Both use `cover`, never `entry`. view() takes the pseudo-element as its own
+   subject, and an entry range can never exceed the subject: these rules are
+   1px and 2px tall, so an entry range would draw them over one or two pixels
+   of scroll, which is a pop rather than a movement. cover spans viewport plus
+   subject, so a small slice of it is a readable distance at any height.
+   --------------------------------------------------------------------------- */
+
+.section-rule {
+  position: relative;
+}
+
+.section-rule::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: var(--color-ink);
+  transform-origin: left;
+}
+
+/* A row in one of the list sections. The rule sits under every row, plus one
+   above the first, which is what `first:border-t` used to do. */
+.rule-row {
+  position: relative;
+}
+
+.rule-row::after,
+.rule-row:first-child::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background-color: var(--color-rule);
+  transform-origin: left;
+}
+
+.rule-row::after {
+  bottom: 0;
+}
+
+.rule-row:first-child::before {
+  top: 0;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section-rule::after {
+      animation: rule-draw linear both;
+      animation-timeline: view();
+      /* ~100px of draw at a 900px viewport. The heading rule is heavier than
+         the row rules and gets a little longer to arrive. */
+      animation-range: cover 4% cover 15%;
+    }
+
+    .rule-row::after,
+    .rule-row:first-child::before {
+      animation: rule-draw linear both;
+      animation-timeline: view();
+      /* Tuned against the row's own reveal, which lands in about 62px. At
+         the previous 114px the text settled and the line went on creeping
+         under it for another 100px. */
+      animation-range: cover 7% cover 15%;
     }
   }
 }
@@ -203,26 +418,6 @@
 @media (min-width: 640px) {
   .masthead-bar-inner {
     --masthead-pad-top: 4rem;
-  }
-}
-
-/* Distance from the h1's rest position to the bar's text line, measured at each
-   step of the clamp. Below 640 the name wraps to two lines and the wrapper uses
-   py-12 rather than py-16, which is why the shortest viewport needs the most
-   travel. */
-.masthead-name {
-  --masthead-name-travel: 167px;
-}
-
-@media (min-width: 640px) {
-  .masthead-name {
-    --masthead-name-travel: 161px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .masthead-name {
-    --masthead-name-travel: 155px;
   }
 }
 
@@ -277,19 +472,25 @@
   }
 }
 
-/* The shrink and the settle are two animations on one element because they
-   need different ranges: the scale finishes at 112px while the name is still
-   in clear air, the travel keeps going to 256px to set it down on the bar's
-   line. They use the individual `scale` and `translate` properties rather than
-   a `transform` shorthand for two reasons. One, a shorthand is a single
-   property, so a second animation on it would replace the first outright
-   instead of composing. Two, the used transform is Translate then Rotate then
-   Scale, which puts the translation OUTSIDE the scale, so the travel is not
-   multiplied by 0.42. Written the other way round, `scale(0.42) translateY(t)`,
-   the 155px would be scaled down to 65px and the name would stop well short of
-   the bar. transform-origin: left (set on the element) fixes where the scale
-   pivots, which keeps the left edge pinned to the column, but it does not
-   affect whether an inner translation gets scaled. */
+/* The name shrinks and scrolls away. It does NOT hold its position.
+   
+   An earlier version added a scroll-counteracting translate so the name
+   settled onto the bar's line. It collided: holding position means descending
+   relative to the content underneath, and the role line sits 4px below the
+   h1's box, so the gap closed after 7px of scroll and the name dragged through
+   the headline and then the bio between 10px and 280px of scroll.
+   
+   That was fixable by clearing the space first, but not worth it. The name
+   also lands on the bar copy's own line, so keeping both legal forces either a
+   badly delayed copy or fading the name out before it visibly arrives - the
+   landing you cannot see. And the fix was four measured constants that hold
+   for today's bio and today's headline.
+   
+   Without the translate the geometry is safe by construction rather than by
+   tuning: scaling about `left` raises the box's bottom edge as it shrinks, so
+   the h1 only ever moves UP relative to the content below it and the gap to
+   the role line grows rather than closes. That holds at every width and
+   survives any content change. */
 @keyframes masthead-name-shrink {
   to {
     /* Compositor-only. The computed font-size stays at --text-display, so the
@@ -298,14 +499,20 @@
   }
 }
 
-@keyframes masthead-name-settle {
+/* The role line is the nearest thing under the name and used to have no
+   animation at all, sitting at full opacity through the whole sequence while
+   everything around it cleared. It now leads the sequence out. */
+@keyframes masthead-role-clear {
   to {
-    /* Counteracts scroll: the name holds its vertical position while it
-       shrinks, then comes to rest on the bar's text line exactly as the bar
-       reaches full opacity and hides it. Value is per-breakpoint because
-       --text-display is clamp(2.5rem, 7vw, 4.5rem), so the h1's height, and
-       therefore the distance to the bar, changes with viewport width. */
-    translate: 0 var(--masthead-name-travel);
+    opacity: 0;
+    /* 4px, not 12. The role sits directly under the name, and the only thing
+       keeping them apart as they scroll is that the name's shrink raises its
+       box bottom faster than the page carries the role upward. A 12px lift
+       outran that: over the role's own range the shrink buys about 7px of
+       clearance, so a 12px lift crossed the name's box by a fraction of a
+       pixel at 768 wide, where the display type is large and the resting gap
+       is near zero. 4px can never outrun it. The fade does the work anyway. */
+    transform: translateY(-4px);
   }
 }
 
@@ -324,58 +531,61 @@
 
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
-    /* Ranges below are in rem, not vh, and that is deliberate. Every anchor
-       in this sequence is a fixed document offset, not a fraction of the
-       screen: the h1 sits 16px under the bar at scroll 0 and its box ends at
-       175px no matter how tall the viewport is. A vh range would overshoot
-       that anchor on a tall display and undershoot on a short one. The rail
-       and the reveals below use view(), which is viewport-relative already. */
+    /* Ranges are in vh now, and the reason they were previously in rem has
+       gone away. They used to be anchored to fixed document offsets - the h1
+       ended at 175px whatever the screen - so a vh range overshot on a tall
+       display and undershot on a short one. The hero is 100svh, so every
+       anchor in this sequence is now a fraction of the screen by construction,
+       and vh is the unit that keeps the whole compression playing across
+       exactly one screenful at any height. */
     .masthead-bar {
       position: fixed;
       animation: masthead-bar-compress linear both;
       animation-timeline: scroll();
-      animation-range: 7rem 16rem;
+      animation-range: 26vh 46vh;
     }
 
     .masthead-bar-inner {
       animation: masthead-bar-pad linear both;
       animation-timeline: scroll();
-      animation-range: 0 22rem;
+      animation-range: 0 78vh;
     }
 
     .masthead-track {
       animation: masthead-track-reveal linear both;
       animation-timeline: scroll();
-      animation-range: 8rem 17rem;
+      animation-range: 30vh 50vh;
     }
 
     .masthead-bar-fade {
-      /* Starts at 256px, the instant the bar hits full opacity and swallows
-         the landed h1. The two copies are never legible at the same time, so
-         their differing sizes are never compared side by side. */
+      /* Starts at 144px, as soon as the shrinking h1's box has cleared this
+         line on its way out, and finishes 48px later. The old 256 -> 368 range
+         left the bar opaque, the big name already hidden behind it and no name
+         yet arrived, so the header read as briefly empty. */
       animation: masthead-bar-reveal linear both;
       animation-timeline: scroll();
-      animation-range: 16rem 23rem;
+      animation-range: 46vh 62vh;
     }
 
     .masthead-name {
-      /* Two timelines, one element. The scale runs 0 -> 112px, finishing
-         while the name is still in clear air; the travel runs 0 -> 256px so the
-         name comes to rest on the bar's line at the same instant the bar's
-         background reaches full opacity and occludes it. */
-      animation:
-        masthead-name-shrink linear both,
-        masthead-name-settle linear both;
-      animation-timeline: scroll(), scroll();
-      animation-range:
-        0 7rem,
-        0 16rem;
+      animation: masthead-name-shrink linear both;
+      animation-timeline: scroll();
+      animation-range: 0 40vh;
+    }
+
+    /* The sequence in which the masthead empties: role first, since it is
+       the nearest line under the name, then the bio, then the name itself has
+       already shrunk out of the way. */
+    .masthead-role {
+      animation: masthead-role-clear linear both;
+      animation-timeline: scroll();
+      animation-range: 0 14vh;
     }
 
     .masthead-bio {
       animation: masthead-bio-collapse linear both;
       animation-timeline: scroll();
-      animation-range: 0 18rem;
+      animation-range: 0 30vh;
     }
 
     /* Reading progress spans the whole document, not the compression range. */
@@ -549,6 +759,37 @@
   display: none;
 }
 
+/* Theme-reactive screenshots.
+   
+   Driven by the .dark class, never by prefers-color-scheme, and that
+   distinction is the whole point. The theme has THREE states - light, system,
+   dark - and an explicit light or dark choice must beat the operating system.
+   A <picture> with a `(prefers-color-scheme: dark)` source only ever reads the
+   OS, so it would serve the dark screenshot to someone who had deliberately
+   set the site to light on a dark machine, and the light one to the reverse:
+   wrong for exactly the readers who cared enough to choose.
+   
+   THEME_INIT_SCRIPT resolves all three states down to the presence or absence
+   of .dark on <html>, blocking in <head>, before the browser paints. So these
+   rules resolve correctly in the first frame and there is no flash of the
+   wrong screenshot, for the same reason and by the same mechanism that the
+   colours themselves do not flash.
+   
+   Outside every @supports and reduced-motion guard on purpose: this is not
+   motion, and a reader with scroll timelines disabled still needs the shot
+   that matches the page they are looking at. */
+.shot-dark {
+  display: none;
+}
+
+.dark .shot-light {
+  display: none;
+}
+
+.dark .shot-dark {
+  display: block;
+}
+
 @keyframes work-shot-in {
   to {
     opacity: 1;
@@ -557,15 +798,6 @@
 
 @supports (animation-timeline: view()) and (timeline-scope: --x) {
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-    /* Breaking the column is the point of the section, so the heading rule
-       widens with it. min() against the viewport means it can never overflow:
-       at exactly 1024px wide the section is 960px, not 1024px. */
-    .section-wide {
-      --section-wide-width: min(72rem, calc(100vw - 4rem));
-      width: var(--section-wide-width);
-      margin-left: calc((100% - var(--section-wide-width)) / 2);
-    }
-
     .work-viewer {
       display: grid;
       grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);

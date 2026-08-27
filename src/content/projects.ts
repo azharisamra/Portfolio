@@ -22,8 +22,22 @@ export interface Project {
   liveUrl: string;
   repoUrl: string;
   featured: boolean;
-  /** Omitted when no real screenshot exists. */
+  /**
+   * The screenshot. When the subject has its own light and dark themes, this
+   * is the LIGHT one and `imageDark` carries its counterpart.
+   * Omitted when no real screenshot exists.
+   */
   image?: ProjectImage;
+  /**
+   * Set only for a subject that genuinely has both themes, so the shot can
+   * track the reader's. Artify and Athletee have one design each, so a screen
+   * shot of them is accurate in either theme and they carry no dark variant.
+   * This site does have both, and is also the only screenshot a reader can
+   * compare against the page around it, which is what made the mismatch read
+   * as a mistake. Must match `image` in width and height; content.test.ts
+   * enforces that.
+   */
+  imageDark?: ProjectImage;
 }
 
 export const projects: readonly Project[] = [
@@ -40,7 +54,13 @@ export const projects: readonly Project[] = [
     repoUrl: "https://github.com/azharisamra/Portfolio",
     featured: true,
     image: {
-      src: "/images/portfolio-home.webp",
+      src: "/images/portfolio-home-light.webp",
+      alt: "This portfolio in light mode: the name set large in condensed capitals, a role line in orange, a short bio, and a rule-separated list of contact links above the Selected Work heading.",
+      width: 1408,
+      height: 880,
+    },
+    imageDark: {
+      src: "/images/portfolio-home-dark.webp",
       alt: "This portfolio in dark mode: the name set large in condensed capitals, a role line in orange, a short bio, and a rule-separated list of contact links above the Selected Work heading.",
       width: 1408,
       height: 880,

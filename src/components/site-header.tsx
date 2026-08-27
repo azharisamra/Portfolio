@@ -1,50 +1,9 @@
 import { profile } from "@/content";
-import { displayUrl } from "@/lib/format";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-interface ContactLink {
-  label: string;
-  href: string;
-  text: string;
-  external: boolean;
-}
-
 export function SiteHeader() {
-  const links: ContactLink[] = [
-    {
-      label: "Email",
-      href: `mailto:${profile.email}`,
-      text: profile.email,
-      external: false,
-    },
-    {
-      label: "GitHub",
-      href: profile.githubUrl,
-      text: displayUrl(profile.githubUrl),
-      external: true,
-    },
-    {
-      label: "LinkedIn",
-      href: profile.linkedinUrl,
-      text: displayUrl(profile.linkedinUrl),
-      external: true,
-    },
-    // Rendered only when a real URL exists - an empty resumeUrl produces no
-    // row rather than a dead link.
-    ...(profile.resumeUrl
-      ? [
-          {
-            label: "Résumé",
-            href: profile.resumeUrl,
-            text: "Download PDF",
-            external: true,
-          },
-        ]
-      : []),
-  ];
-
   return (
-    <header className="border-b-2 border-ink pb-8">
+    <header className="frame-wide border-b-2 border-ink">
       {/* Pinned masthead bar. Out of flow, so the header below keeps its
           natural height at every width and no spacer is needed. At scroll 0 it
           is transparent and shows only the toggle, in the same place the toggle
@@ -56,8 +15,15 @@ export function SiteHeader() {
           <p className="masthead-bar-fade truncate font-condensed text-label uppercase">
             {profile.name}
           </p>
+          {/* tabIndex -1 on purpose. This is the third link to the same
+              address on the page, and it spends the top of the page at
+              opacity 0 while still being focusable: tabbing early landed on an
+              invisible link with an invisible focus ring. Keyboard users reach
+              the address through the contact list, which is visible and in
+              context. Still clickable, still announced. */}
           <a
             href={`mailto:${profile.email}`}
+            tabIndex={-1}
             className="masthead-bar-fade ml-auto hidden truncate font-condensed text-label text-muted uppercase sm:block"
           >
             {profile.email}
@@ -80,46 +46,41 @@ export function SiteHeader() {
         </span>
       </div>
 
-      {/* min-height reserves the row the theme toggle used to occupy, so
-          moving the toggle into the pinned bar does not shift the name
-          upward at scroll 0. 27px is the toggle's rendered height. */}
-      <div className="flex min-h-[27px] flex-wrap items-start justify-between gap-4">
-        <p className="font-condensed text-label text-muted uppercase">
-          {profile.location}
-        </p>
+      {/* The hero owns the first screen. Name and role take the wide frame;
+          the bio and contacts drop back to the reading measure below. */}
+      <div className="hero-inner">
+        {/* min-height reserves the row the theme toggle used to occupy, so
+            moving the toggle into the pinned bar does not shift the name
+            upward at scroll 0. 27px is the toggle's rendered height. */}
+        <div className="hero-rise flex min-h-[27px] flex-wrap items-start justify-between gap-4">
+          <p className="font-condensed text-label text-muted uppercase">
+            {profile.location}
+          </p>
+        </div>
+
+        {/* The entrance rides a wrapper, not the element itself. Both the
+            entrance and the scroll compression are `animation` shorthands, and
+            an element carries only one animation-name list, so whichever rule
+            came later in the stylesheet silently replaced the other. A wrapper
+            gives each its own element and they compose. */}
+        <div className="hero-rise hero-rise-2">
+          <h1 className="masthead-name mt-4 origin-left font-condensed text-display uppercase">
+            {profile.name}
+          </h1>
+        </div>
+
+        <div className="hero-rise hero-rise-3">
+          <p className="masthead-role mt-1 font-condensed text-section text-accent uppercase">
+            {profile.headline}
+          </p>
+        </div>
+
+        <div className="hero-measure mt-10">
+          <div className="hero-rise hero-rise-4">
+            <p className="masthead-bio text-body text-muted">{profile.bio}</p>
+          </div>
+        </div>
       </div>
-
-      <h1 className="masthead-name mt-4 origin-left font-condensed text-display uppercase">
-        {profile.name}
-      </h1>
-
-      <p className="mt-1 font-condensed text-section text-accent uppercase">
-        {profile.headline}
-      </p>
-
-      <p className="masthead-bio mt-6 text-body text-muted">{profile.bio}</p>
-
-      <ul className="mt-8 border-t border-rule">
-        {links.map((link) => (
-          <li
-            key={link.label}
-            className="grid gap-0.5 border-b border-rule py-3 sm:grid-cols-[7rem_1fr] sm:items-baseline sm:gap-6"
-          >
-            <span className="font-condensed text-label text-muted uppercase">
-              {link.label}
-            </span>
-            <a
-              href={link.href}
-              className="text-body break-words"
-              {...(link.external
-                ? { target: "_blank", rel: "noreferrer" }
-                : {})}
-            >
-              {link.text}
-            </a>
-          </li>
-        ))}
-      </ul>
     </header>
   );
 }

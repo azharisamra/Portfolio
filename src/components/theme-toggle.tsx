@@ -104,7 +104,11 @@ export function ThemeToggle() {
     <div
       role="radiogroup"
       aria-label="Colour theme"
-      className="inline-flex border border-rule"
+      // bg-ground, not transparent: the control sits in the pinned bar, so the
+      // shrinking name passes behind it on its way out. Without an opaque
+      // ground the name shows through the two unselected buttons. Identical to
+      // the page behind it at rest, so nothing changes at scroll 0.
+      className="inline-flex border border-rule bg-ground"
     >
       {THEMES.map((option, index) => {
         const selected = theme === option;
