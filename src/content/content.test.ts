@@ -167,3 +167,16 @@ describe("skills", () => {
     }
   });
 });
+
+describe("pinned project viewer", () => {
+  // globals.css hard-codes .work-card-1..3 / .work-shot-1..3 and a
+  // timeline-scope naming --work-1..3. A fourth featured project with a
+  // screenshot would render with no timeline and never appear in the panel, so
+  // fail here rather than silently.
+  it("has exactly three featured projects carrying a screenshot", () => {
+    const shots = projects.filter(
+      (project) => project.featured && project.image,
+    );
+    expect(shots).toHaveLength(3);
+  });
+});
