@@ -248,7 +248,12 @@
   min-height: calc(100vh - var(--hero-offset));
   min-height: calc(100svh - var(--hero-offset));
   flex-direction: column;
-  padding-bottom: 2rem;
+  /* Centred rather than top-aligned. Two things fall out of it: the masthead
+     stops leaving a large hole at the foot of the screen, and the name starts
+     far enough below the pinned bar that the bar has room to gain its
+     background before the name rises into the toggle. */
+  justify-content: center;
+  padding-block: 2rem;
 }
 
 @media (min-width: 640px) {
@@ -538,23 +543,31 @@
        anchor in this sequence is now a fraction of the screen by construction,
        and vh is the unit that keeps the whole compression playing across
        exactly one screenful at any height. */
+    /* The bar stays pinned and simply gains its background before the name
+       can reach it. Making it leave with the hero was tried and reverted: the
+       toggle is the only theme control on the site, and a fixed element that
+       has travelled off screen is still focusable with nowhere to scroll to,
+       so tabbing landed on an invisible control. Hiding it instead would make
+       the control's presence in the accessibility tree depend on scroll
+       position, which is worse. The bar being the toggle's only home is
+       exactly why the bar cannot go anywhere. */
     .masthead-bar {
       position: fixed;
       animation: masthead-bar-compress linear both;
       animation-timeline: scroll();
-      animation-range: 26vh 46vh;
+      animation-range: 4vh 14vh;
     }
 
     .masthead-bar-inner {
       animation: masthead-bar-pad linear both;
       animation-timeline: scroll();
-      animation-range: 0 78vh;
+      animation-range: 0 42vh;
     }
 
     .masthead-track {
       animation: masthead-track-reveal linear both;
       animation-timeline: scroll();
-      animation-range: 30vh 50vh;
+      animation-range: 6vh 16vh;
     }
 
     .masthead-bar-fade {
@@ -564,7 +577,7 @@
          yet arrived, so the header read as briefly empty. */
       animation: masthead-bar-reveal linear both;
       animation-timeline: scroll();
-      animation-range: 46vh 62vh;
+      animation-range: 30vh 42vh;
     }
 
     .masthead-name {
