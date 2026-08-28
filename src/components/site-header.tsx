@@ -64,7 +64,7 @@ export function SiteHeader() {
             came later in the stylesheet silently replaced the other. A wrapper
             gives each its own element and they compose. */}
         <div className="hero-rise hero-rise-2">
-          <h1 className="masthead-name mt-4 origin-left font-condensed text-display uppercase">
+          <h1 className="masthead-name mt-10 origin-left font-condensed text-display uppercase">
             {profile.name}
           </h1>
         </div>
