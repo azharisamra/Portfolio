@@ -14,8 +14,13 @@ export const skills: readonly SkillGroup[] = [
     items: ["React", "Redux", "Next.js", "Tailwind CSS", "Framer Motion"],
   },
   {
-    category: "Backend",
-    items: ["Node.js", "Spring Boot", "Flask", "REST APIs"],
+    // Renamed from "Backend", and Node.js removed. The bullets show these
+    // being consumed rather than built: the Baker Hughes dashboards integrated
+    // against Spring Boot and Flask services written by the backend team.
+    // Calling that "Backend" was the overclaim; naming it accurately is a
+    // stronger position than a longer list nobody can check.
+    category: "APIs & integration",
+    items: ["REST APIs", "Spring Boot", "Flask"],
   },
   {
     category: "Cloud & infra",
@@ -23,7 +28,7 @@ export const skills: readonly SkillGroup[] = [
   },
   {
     category: "Testing",
-    items: ["Jest", "React Testing Library", "Enzyme"],
+    items: ["Jest", "Cucumber", "React Testing Library", "Enzyme"],
   },
   {
     category: "Databases",

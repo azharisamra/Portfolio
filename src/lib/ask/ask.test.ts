@@ -100,7 +100,15 @@ describe("grounding prompt", () => {
   });
 
   it("forbids inventing a number of years", () => {
-    expect(prompt).toMatch(/never estimate a number of years/i);
+    // Reworded after the model computed "5 years of professional experience,
+    // from October 2020 to October 2024" from the role dates. The roles have
+    // gaps, so any total is wrong, and a fabricated tenure is the single most
+    // damaging thing this panel could say. The rule now bans the arithmetic
+    // itself rather than only the word "estimate".
+    expect(prompt).toMatch(
+      /never add up, total, or estimate a length of time/i,
+    );
+    expect(prompt).toMatch(/do not compute years of experience/i);
   });
 
   it("contains no claim absent from the content modules", () => {
