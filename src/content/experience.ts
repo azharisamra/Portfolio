@@ -20,7 +20,7 @@ export interface Role {
 export const experience: readonly Role[] = [
   {
     company: "Outlier AI",
-    title: "Quality Manager, Operations (QMO)",
+    title: "Queue Manager, Operations (QMO)",
     location: "Mumbai",
     startDate: "Oct 2024",
     endDate: null,
