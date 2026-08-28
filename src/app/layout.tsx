@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { Barlow, Barlow_Condensed, Cormorant_Garamond } from "next/font/google";
 import { profile } from "@/content";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { SITE_URL } from "@/lib/site";
@@ -24,6 +24,23 @@ const barlowCondensed = Barlow_Condensed({
   // No custom `fallback`: supplying one suppresses the metric-adjusted
   // fallback face next/font would otherwise generate, which is what keeps
   // layout from shifting when the real font swaps in.
+});
+
+/**
+ * Display serif, section headings only.
+ *
+ * A third family earns its place because the other two cannot do this job and
+ * it cannot do theirs: Barlow Condensed carries every small uppercase label on
+ * the site, where a high-contrast serif at 11px with 0.1em tracking would be
+ * illegible, and Barlow carries body copy, where a condensed face is wrong. One
+ * weight only, to keep the cost of the third family down.
+ */
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-cormorant",
+  display: "swap",
+  // No custom `fallback`, for the same reason as the two above.
 });
 
 const siteTitle = `${profile.name} | ${profile.headline}`;
@@ -70,7 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // React hydrates, so server and client markup differ here by design.
     <html
       lang="en"
-      className={`${barlow.variable} ${barlowCondensed.variable}`}
+      className={`${barlow.variable} ${barlowCondensed.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
       <head>

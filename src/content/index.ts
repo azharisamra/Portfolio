@@ -1,3 +1,6 @@
+export { sectionLinks } from "./sections";
+export type { SectionLink } from "./sections";
+
 export { profile } from "./profile";
 export type { Profile } from "./profile";
 

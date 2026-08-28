@@ -28,6 +28,7 @@ export const experience: readonly Role[] = [
       "Write prompts and task scenarios used directly in AI model training and fine-tuning pipelines, and design the rubrics and verifiers that evaluate them.",
       "Audit task rubrics across AI coding benchmarks for atomicity, outcome-based framing, and non-overlapping criteria.",
       "Review verifier scripts and test suites for synthetic environments provisioned with AWS CDK, Docker and LocalStack, catching test gaps and false passes before they ship.",
+      "Write the programs a task scenario calls for, in Python and SQL, including work against MongoDB, MySQL and Firebase.",
       "Build onboarding material for new contributors, including a training deck and a scored practice course.",
     ],
   },
@@ -40,7 +41,9 @@ export const experience: readonly Role[] = [
     bullets: [
       "Built interactive dashboards for real-time oil and gas well data using React, TypeScript and Redux, reducing load time by 30%.",
       "Wrote unit tests with Jest and Enzyme inside an Agile/Scrum team, improving code coverage and reducing bugs by 20%.",
-      "Shipped frontend features across the full SDLC, from design through deployment.",
+      "Integrated the dashboards with REST APIs built by the backend team in Spring Boot and Flask.",
+      "Worked as QA alongside the frontend delivery, writing automated test cases in Java and behaviour-driven scenarios with Cucumber.",
+      "Shipped frontend features across the full SDLC, from design through deployment on Jenkins CI/CD pipelines.",
     ],
   },
   {
