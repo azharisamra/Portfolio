@@ -19,7 +19,7 @@ export function Section({ id, title, wide = false, children }: SectionProps) {
   return (
     <section aria-labelledby={id} className="frame-wide mt-16">
       <div className="section-rule pb-2">
-        <h2 id={id} className="font-condensed text-section uppercase">
+        <h2 id={id} className="font-serif text-section">
           {title}
         </h2>
       </div>

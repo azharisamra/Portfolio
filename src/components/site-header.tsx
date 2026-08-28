@@ -1,7 +1,18 @@
-import { profile } from "@/content";
+import { profile, sectionLinks } from "@/content";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
+  // Resume only when a real URL exists, the same rule ContactSection uses, so
+  // an empty resumeUrl produces three rows rather than a dead link.
+  const footLinks = [
+    { label: "Email", href: `mailto:${profile.email}`, external: false },
+    { label: "GitHub", href: profile.githubUrl, external: true },
+    { label: "LinkedIn", href: profile.linkedinUrl, external: true },
+    ...(profile.resumeUrl
+      ? [{ label: "Resume", href: profile.resumeUrl, external: true }]
+      : []),
+  ];
+
   return (
     <header className="frame-wide border-b-2 border-ink">
       {/* Pinned masthead bar. Out of flow, so the header below keeps its
@@ -15,23 +26,13 @@ export function SiteHeader() {
           <p className="masthead-bar-fade truncate font-condensed text-label uppercase">
             {profile.name}
           </p>
-          {/* tabIndex -1 on purpose. This is the third link to the same
-              address on the page, and it spends the top of the page at
-              opacity 0 while still being focusable: tabbing early landed on an
-              invisible link with an invisible focus ring. Keyboard users reach
-              the address through the contact list, which is visible and in
-              context. Still clickable, still announced. */}
-          <a
-            href={`mailto:${profile.email}`}
-            tabIndex={-1}
-            className="masthead-bar-fade ml-auto hidden truncate font-condensed text-label text-muted uppercase sm:block"
-          >
-            {profile.email}
-          </a>
           {/* flex, not block: the inline-flex radiogroup would otherwise sit on a
               text baseline and gain 2px of leading, shifting it off the position
-              it occupies today. */}
-          <div className="ml-auto flex shrink-0 sm:ml-0">
+              it occupies today. ml-auto at every width now: it used to carry
+              sm:ml-0 because the email sat between the name and the toggle and
+              did the pushing, and removing the email left the toggle sliding
+              back to the middle. */}
+          <div className="ml-auto flex shrink-0">
             <ThemeToggle />
           </div>
         </div>
@@ -49,36 +50,82 @@ export function SiteHeader() {
       {/* The hero owns the first screen. Name and role take the wide frame;
           the bio and contacts drop back to the reading measure below. */}
       <div className="hero-inner">
-        {/* min-height reserves the row the theme toggle used to occupy, so
+        <div className="hero-top">
+          {/* min-height reserves the row the theme toggle used to occupy, so
             moving the toggle into the pinned bar does not shift the name
             upward at scroll 0. 27px is the toggle's rendered height. */}
-        <div className="hero-rise flex min-h-[27px] flex-wrap items-start justify-between gap-4">
-          <p className="font-condensed text-label text-muted uppercase">
-            {profile.location}
-          </p>
-        </div>
+          <div className="hero-rise flex min-h-[27px] flex-wrap items-start justify-between gap-4">
+            <p className="font-condensed text-label text-muted uppercase">
+              {profile.location}
+            </p>
+          </div>
 
-        {/* The entrance rides a wrapper, not the element itself. Both the
+          {/* The entrance rides a wrapper, not the element itself. Both the
             entrance and the scroll compression are `animation` shorthands, and
             an element carries only one animation-name list, so whichever rule
             came later in the stylesheet silently replaced the other. A wrapper
             gives each its own element and they compose. */}
-        <div className="hero-rise hero-rise-2">
-          <h1 className="masthead-name mt-10 origin-left font-condensed text-display uppercase">
-            {profile.name}
-          </h1>
-        </div>
-
-        <div className="hero-rise hero-rise-3">
-          <p className="masthead-role mt-1 font-condensed text-section text-accent uppercase">
-            {profile.headline}
-          </p>
-        </div>
-
-        <div className="hero-measure mt-10">
-          <div className="hero-rise hero-rise-4">
-            <p className="masthead-bio text-body text-muted">{profile.bio}</p>
+          <div className="hero-rise hero-rise-2">
+            <h1 className="masthead-name mt-10 origin-left font-condensed text-display uppercase">
+              {profile.name}
+            </h1>
           </div>
+
+          <div className="hero-rise hero-rise-3">
+            <p className="masthead-role mt-1 font-condensed text-section text-accent uppercase">
+              {profile.headline}
+            </p>
+          </div>
+
+          <div className="hero-measure mt-10">
+            <div className="hero-rise hero-rise-4">
+              <p className="masthead-bio text-body text-muted">{profile.bio}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Foot of the first screen. Anchoring this is what stops the leftover
+            height pooling into one dead band below everything, and it puts a
+            way to make contact above the fold again: the bar's email does not
+            arrive until 30vh. Labels rather than full URLs, so the block stays
+            short enough to sit inside the air that is already there and the
+            name does not move. The addresses are spelled out in Contact. */}
+        <div className="hero-foot hero-measure hero-rise hero-rise-4">
+          {/* A section index, not a sentence. It is the only thing that adds
+              a function the first screen did not have: wayfinding on a long
+              single page, and a visible signal that there is more below. The
+              ids are the anchors the sections already render, so nothing new
+              is invented, and scroll-padding-top clears the pinned bar. */}
+          <nav aria-label="Sections">
+            <ul className="flex flex-wrap gap-x-5 gap-y-1">
+              {sectionLinks.map((section) => (
+                <li key={section.id}>
+                  <a
+                    href={`#${section.id}`}
+                    className="font-condensed text-label text-muted uppercase"
+                  >
+                    {section.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-1">
+            {footLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="font-condensed text-label uppercase"
+                  {...(link.external
+                    ? { target: "_blank", rel: "noreferrer" }
+                    : {})}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </header>

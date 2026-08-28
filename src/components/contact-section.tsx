@@ -1,27 +1,19 @@
 import { profile } from "@/content";
-import { displayUrl } from "@/lib/format";
 import { Section } from "@/components/section";
 
+/**
+ * The closing call to action, and deliberately NOT a second copy of the hero's
+ * contact list.
+ *
+ * The hero foot now carries the full set of links, so repeating them here would
+ * put every address in the document twice and a screen reader would read the
+ * email out three times counting the pinned bar. There is no honest markup fix
+ * for that: aria-hidden on a focusable link is a violation, and tabindex="-1"
+ * leaves a control that a mouse can reach and a keyboard cannot. The fix is to
+ * not have two copies. So the hero is where you find the links, and this is the
+ * one place that asks for the reply.
+ */
 export function ContactSection() {
-  const socials = [
-    {
-      label: "GitHub",
-      href: profile.githubUrl,
-      text: displayUrl(profile.githubUrl),
-    },
-    {
-      label: "LinkedIn",
-      href: profile.linkedinUrl,
-      text: displayUrl(profile.linkedinUrl),
-    },
-    // Moved here when the hero's duplicate contact list was removed. Still
-    // rendered only when a real URL exists, so an empty resumeUrl produces no
-    // row rather than a dead link.
-    ...(profile.resumeUrl
-      ? [{ label: "Resume", href: profile.resumeUrl, text: "Download PDF" }]
-      : []),
-  ];
-
   return (
     <Section id="contact" title="Contact">
       <div className="reveal-on-scroll mt-6">
@@ -32,27 +24,6 @@ export function ContactSection() {
           {profile.email}
           <span aria-hidden="true">→</span>
         </a>
-
-        <ul className="mt-8 border-t border-rule">
-          {socials.map((social) => (
-            <li
-              key={social.label}
-              className="grid gap-0.5 border-b border-rule py-3 sm:grid-cols-[7rem_1fr] sm:items-baseline sm:gap-6"
-            >
-              <span className="font-condensed text-label text-muted uppercase">
-                {social.label}
-              </span>
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                className="text-body break-words"
-              >
-                {social.text}
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
     </Section>
   );

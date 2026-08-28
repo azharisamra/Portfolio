@@ -1,6 +1,8 @@
+import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   profile,
+  sectionLinks,
   experience,
   projects,
   education,
@@ -194,6 +196,37 @@ describe("pinned project viewer", () => {
   it("never pairs a dark screenshot with a missing light one", () => {
     for (const project of projects) {
       if (project.imageDark) expect(project.image).toBeDefined();
+    }
+  });
+});
+
+describe("hero section index", () => {
+  // Reads the component sources rather than rendering: a link in the hero that
+  // points at an id no section renders any more would scroll nowhere, and that
+  // is exactly the failure a refactor causes silently.
+  const rendered = (() => {
+    const dir = new URL("../components/", import.meta.url);
+    const files = readdirSync(dir).filter((f) => f.endsWith(".tsx"));
+    const ids = new Set<string>();
+    for (const file of files) {
+      const src = readFileSync(new URL(file, dir), "utf8");
+      for (const m of src.matchAll(/<Section\s+id="([^"]+)"/g)) ids.add(m[1]);
+    }
+    return ids;
+  })();
+
+  it("points every index link at a section the page actually renders", () => {
+    for (const link of sectionLinks) {
+      expect(rendered.has(link.id), `no <Section id="${link.id}">`).toBe(true);
+    }
+  });
+
+  it("lists every rendered section", () => {
+    const linked = new Set(sectionLinks.map((l) => l.id));
+    for (const id of rendered) {
+      expect(linked.has(id), `section "${id}" is missing from the index`).toBe(
+        true,
+      );
     }
   });
 });

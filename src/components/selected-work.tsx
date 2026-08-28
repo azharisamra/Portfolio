@@ -43,14 +43,16 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
     <li
       className={`${timelineClass} reveal-on-scroll border-b border-rule py-8 first:border-t`}
     >
-      <div className="flex items-baseline justify-between gap-4">
-        <span className="font-condensed text-label text-accent">{number}</span>
-        <span className="font-condensed text-label text-muted uppercase tabular-nums">
-          {project.timeframe}
-        </span>
-      </div>
+      {/* One eyebrow, not a number pinned left and a date pinned right. The
+          editorial caption reads number, then subject, then body, then spec,
+          all from the same left edge; splitting the first line across the full
+          width broke that before the heading even started. */}
+      <p className="font-condensed text-label uppercase tabular-nums">
+        <span className="text-accent">{number}</span>
+        <span className="text-muted"> · {project.timeframe}</span>
+      </p>
 
-      <h3 className="mt-2 font-condensed text-section uppercase">
+      <h3 className="mt-3 font-condensed text-section uppercase">
         {project.title}
       </h3>
 
