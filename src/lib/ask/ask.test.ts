@@ -1,7 +1,14 @@
 import { describe, expect, it, vi } from "vitest";
 import { DAILY_LIMIT, IP_LIMIT, MAX_QUESTION_CHARS } from "@/lib/ask/config";
 import { buildSystemPrompt } from "@/lib/ask/context";
-import { profile, experience, projects } from "@/content";
+import {
+  profile,
+  experience,
+  projects,
+  skills,
+  education,
+  certifications,
+} from "@/content";
 
 /**
  * The rate limiter holds state at module scope, so each test re-imports it to
@@ -122,5 +129,55 @@ describe("grounding prompt", () => {
 describe("request limits", () => {
   it("caps question length low enough to bound input cost", () => {
     expect(MAX_QUESTION_CHARS).toBeLessThanOrEqual(1000);
+  });
+});
+
+describe("grounding context completeness", () => {
+  // Twice now a content module rendered on the page never reached the model,
+  // and the panel denied things the page states: first Skills ("she has not
+  // listed AWS experience"), then Education (her master's degree was "not
+  // listed"). Both were found by visitors' questions, not by tests. This suite
+  // makes the contract structural: every fact module the page renders must
+  // surface in the prompt.
+  const prompt = buildSystemPrompt();
+
+  it("carries every role", () => {
+    for (const role of experience) {
+      expect(prompt).toContain(role.company);
+      expect(prompt).toContain(role.title);
+    }
+  });
+
+  it("carries every skill", () => {
+    for (const group of skills) {
+      for (const item of group.items) expect(prompt).toContain(item);
+    }
+  });
+
+  it("carries every education entry", () => {
+    for (const item of education) {
+      expect(prompt).toContain(item.degree);
+      expect(prompt).toContain(item.institution);
+      expect(prompt).toContain(item.year);
+    }
+  });
+
+  it("carries every certification", () => {
+    for (const cert of certifications) {
+      expect(prompt).toContain(cert.name);
+      expect(prompt).toContain(cert.issuer);
+    }
+  });
+
+  it("carries every project", () => {
+    for (const project of projects) {
+      expect(prompt).toContain(project.title);
+    }
+  });
+
+  it("carries the profile facts", () => {
+    expect(prompt).toContain(profile.name);
+    expect(prompt).toContain(profile.email);
+    expect(prompt).toContain(profile.availability);
   });
 });

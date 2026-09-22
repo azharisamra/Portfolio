@@ -1,4 +1,11 @@
-import { profile, experience, projects, skills } from "@/content";
+import {
+  profile,
+  experience,
+  projects,
+  skills,
+  education,
+  certifications,
+} from "@/content";
 import { formatRange } from "@/lib/format";
 
 /**
@@ -38,6 +45,25 @@ const buildContext = (): string => {
   // grounding rules below still stop the model inflating a chip into a story.
   for (const group of skills) {
     lines.push(`- ${group.category}: ${group.items.join(", ")}`);
+  }
+
+  lines.push("");
+  lines.push("## EDUCATION");
+  // Rendered on the page from the start, but never given to the model, so the
+  // panel told visitors her degree was "not listed" while the Education section
+  // sat two scrolls above the answer. Second bug of this exact shape after the
+  // Skills omission; the test suite now asserts every content module that the
+  // page renders also reaches this context.
+  for (const item of education) {
+    lines.push(
+      `- ${item.degree}, ${item.institution} (${item.location}), ${item.year}`,
+    );
+  }
+
+  lines.push("");
+  lines.push("## CERTIFICATIONS");
+  for (const cert of certifications) {
+    lines.push(`- ${cert.name}, ${cert.issuer}, ${cert.date}`);
   }
 
   lines.push("");
