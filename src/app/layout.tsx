@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed, Cormorant_Garamond } from "next/font/google";
 import { profile } from "@/content";
+import { HEAD_SANITIZER_SCRIPT } from "@/lib/head-sanitizer";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { SITE_URL } from "@/lib/site";
 import { PersonJsonLd } from "@/components/person-jsonld";
@@ -91,6 +92,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
+        {/* Order matters: the sanitizer clears the host's injected head
+            comment before hydration, or React 19 fails to hydrate and wipes
+            the class the theme script sets. See head-sanitizer.ts. */}
+        <script dangerouslySetInnerHTML={{ __html: HEAD_SANITIZER_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <PersonJsonLd />
       </head>
