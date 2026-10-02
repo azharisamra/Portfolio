@@ -45,9 +45,21 @@ const run = (head: FakeHead): void => {
   new Function("document", HEAD_SANITIZER_SCRIPT)({ head });
 };
 
-const el = (): FakeNode => ({ nodeType: ELEMENT, nodeValue: null, nextSibling: null });
-const comment = (text: string): FakeNode => ({ nodeType: COMMENT, nodeValue: text, nextSibling: null });
-const text = (value: string): FakeNode => ({ nodeType: TEXT, nodeValue: value, nextSibling: null });
+const el = (): FakeNode => ({
+  nodeType: ELEMENT,
+  nodeValue: null,
+  nextSibling: null,
+});
+const comment = (text: string): FakeNode => ({
+  nodeType: COMMENT,
+  nodeValue: text,
+  nextSibling: null,
+});
+const text = (value: string): FakeNode => ({
+  nodeType: TEXT,
+  nodeValue: value,
+  nextSibling: null,
+});
 
 describe("HEAD_SANITIZER_SCRIPT", () => {
   it("removes the injected comment and its newline, nothing else", () => {
