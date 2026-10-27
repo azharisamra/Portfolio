@@ -8,15 +8,15 @@ export interface Education {
 
 export const education: readonly Education[] = [
   {
-    degree: "Master of Computer Application",
+    degree: "Master of Computer Applications",
     institution: "SNDT Women's University",
     location: "Mumbai",
     year: "2023",
   },
   {
     degree: "Bachelor of Computer Science",
-    institution: "JAT Arts, Science & Commerce College",
-    location: "Mumbai",
+    institution: "Savitribai Phule Pune University",
+    location: "Pune",
     year: "2021",
   },
 ];

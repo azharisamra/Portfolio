@@ -2,7 +2,7 @@
 
 Personal portfolio and CV site. Live at **<https://samraazhari.netlify.app>**.
 
-![The portfolio in light mode: the name set large in condensed type, a role line, a short bio, and a rule-separated list of contact links above the Selected Work section.](docs/screenshot.webp)
+![The portfolio in light mode: the name set large in condensed type, an orange role line, a short bio, and rows of section and contact links at the foot of the first screen.](docs/screenshot.webp)
 
 ## Stack
 

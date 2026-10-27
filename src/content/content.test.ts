@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   profile,
@@ -34,6 +34,14 @@ describe("profile", () => {
     expect(profile.email).toMatch(/^[^@\s]+@[^@\s]+\.\w+$/);
     expect(profile.githubUrl).toMatch(/^https:\/\//);
     expect(profile.linkedinUrl).toMatch(/^https:\/\//);
+  });
+
+  it("links a resume file that actually ships with the site", () => {
+    // A relative resumeUrl is served from public/. Renaming or deleting the
+    // file would leave the hero's Resume link pointing at a 404.
+    if (!profile.resumeUrl.startsWith("/")) return;
+    const file = new URL(`../../public${profile.resumeUrl}`, import.meta.url);
+    expect(existsSync(file), profile.resumeUrl).toBe(true);
   });
 
   it("states no year count, which would be unverifiable from this site", () => {

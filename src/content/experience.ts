@@ -14,8 +14,9 @@ export interface Role {
  *
  * The bullets do NOT - the brief lists no role descriptions. They are drafted
  * from your resume PDF, which the brief names as the source of truth for this
- * section. Every figure in them ("30%", "20%", "4+") is yours, from that
- * document; none was invented here. Review before shipping.
+ * section. Every figure in them ("30%", "20%", "4") is yours, from that
+ * document; none was invented here. The Adguru Online and Resume Jar bullets
+ * follow the Oct 2026 CV word for word. Review before shipping.
  */
 export const experience: readonly Role[] = [
   {
@@ -52,11 +53,9 @@ export const experience: readonly Role[] = [
     location: "Mumbai",
     startDate: "Jul 2022",
     endDate: "Sep 2022",
-    // TODO(samra): your resume carries one bullet for this role; these two are
-    // that sentence split in half. Send more detail if you want real coverage.
     bullets: [
-      "Delivered 4+ responsive, SEO-optimised client websites across different domains.",
-      "Ensured cross-browser compatibility and improved load performance on every site delivered.",
+      "Delivered 4 responsive, SEO-friendly client websites with cross-browser compatibility and faster page loads.",
+      "Turned client requirements into working web pages on agreed timelines.",
     ],
   },
   {
@@ -65,10 +64,8 @@ export const experience: readonly Role[] = [
     location: "Mumbai",
     startDate: "Oct 2020",
     endDate: "May 2021",
-    // TODO(samra): same as above - one resume bullet, split into two.
     bullets: [
-      "Maintained and extended the company website, implementing responsive layouts across breakpoints.",
-      "Applied SEO optimisations to improve user engagement.",
+      "Maintained and improved the company website with responsive layouts and SEO optimisation.",
     ],
   },
 ];

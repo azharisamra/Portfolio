@@ -15,18 +15,15 @@ export const certifications: readonly Certification[] = [
     name: "React: The Complete Guide 2023 (incl. React Router & Redux)",
     issuer: "Udemy",
     date: "Dec 2023",
-    // TODO(samra): credential URL
   },
   {
     name: "React.js Essential Training",
     issuer: "LinkedIn",
     date: "Mar 2023",
-    // TODO(samra): credential URL
   },
   {
     name: "HTML & CSS Course",
     issuer: "Cisco thingQbator, RGIPT",
     date: "Nov 2022",
-    // TODO(samra): credential URL
   },
 ];

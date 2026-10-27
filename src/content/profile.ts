@@ -18,9 +18,7 @@ export interface Profile {
 }
 
 export const profile: Profile = {
-  // TODO(samra): confirm display form - full name, or just "Samra"?
   name: "Samra Hifzur Rahman",
-  // TODO(samra): headline drafted from the target roles in your brief.
   headline: "Full Stack Developer & Frontend Engineer",
   location: "Mumbai, India",
   bio: "I work across the front end and the data side: React and TypeScript in the browser, Python and SQL against MongoDB, MySQL and Firebase. I'm currently Queue Manager, Operations at Outlier AI, and I build and ship my own projects alongside it, including the site you are reading. I'm looking for Full Stack Developer and Frontend Engineer roles in Dubai and the UAE, including teams building AI and LLM products.",
@@ -31,6 +29,8 @@ export const profile: Profile = {
   email: "azharisamra@gmail.com",
   linkedinUrl: "https://www.linkedin.com/in/samrahifzurrahman",
   githubUrl: "https://github.com/azharisamra",
-  // TODO(samra): real URL needed
-  resumeUrl: "",
+  // Public copy of the Full Stack Engineer CV with the phone number and date
+  // of birth removed. Served from public/, so it moves with the deploy and
+  // works on preview URLs. Regenerate it whenever the CV changes.
+  resumeUrl: "/resume.pdf",
 };
