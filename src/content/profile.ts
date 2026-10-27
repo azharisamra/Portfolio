@@ -29,8 +29,9 @@ export const profile: Profile = {
   email: "azharisamra@gmail.com",
   linkedinUrl: "https://www.linkedin.com/in/samrahifzurrahman",
   githubUrl: "https://github.com/azharisamra",
-  // Public copy of the Full Stack Engineer CV with the phone number and date
-  // of birth removed. Served from public/, so it moves with the deploy and
-  // works on preview URLs. Regenerate it whenever the CV changes.
+  // Portfolio resume: a separate version of the CV with no phone number,
+  // photo or date of birth. Regenerate it whenever its source doc changes.
+  // Served from public/, so it moves with the deploy and works on preview
+  // URLs.
   resumeUrl: "/resume.pdf",
 };
