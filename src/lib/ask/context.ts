@@ -32,6 +32,11 @@ const buildContext = (): string => {
     lines.push(
       `- ${role.title}, ${role.company} (${role.location}), ${formatRange(role.startDate, role.endDate)}${role.endDate === null ? " [CURRENT ROLE]" : ""}`,
     );
+    for (const earlier of role.earlierTitles ?? []) {
+      lines.push(
+        `    Earlier title at ${role.company}: ${earlier.title}, ${formatRange(earlier.startDate, earlier.endDate)}`,
+      );
+    }
     for (const bullet of role.bullets) lines.push(`    * ${bullet}`);
   }
 

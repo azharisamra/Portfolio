@@ -145,6 +145,12 @@ describe("grounding context completeness", () => {
     for (const role of experience) {
       expect(prompt).toContain(role.company);
       expect(prompt).toContain(role.title);
+      for (const earlier of role.earlierTitles ?? []) {
+        expect(prompt).toContain(earlier.title);
+        expect(prompt).toContain(
+          `${earlier.title}, ${earlier.startDate} to ${earlier.endDate}`,
+        );
+      }
     }
   });
 

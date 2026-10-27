@@ -21,7 +21,7 @@ export const profile: Profile = {
   name: "Samra Hifzur Rahman",
   headline: "Full Stack Developer & Frontend Engineer",
   location: "Mumbai, India",
-  bio: "I work across the front end and the data side: React and TypeScript in the browser, Python and SQL against MongoDB, MySQL and Firebase. I'm currently Queue Manager, Operations at Outlier AI, and I build and ship my own projects alongside it, including the site you are reading. I'm looking for Full Stack Developer and Frontend Engineer roles in Dubai and the UAE, including teams building AI and LLM products.",
+  bio: "I work across the front end and the data side: React and TypeScript in the browser, Python and SQL against MongoDB, MySQL and Firebase. I'm currently Queue Manager for GenAI Code at Scale AI (Outlier), and I build and ship my own projects alongside it, including the site you are reading. I'm looking for Full Stack Developer and Frontend Engineer roles in Dubai and the UAE, including teams building AI and LLM products.",
   availability:
     "Available immediately with no notice period. Based in Mumbai, open to relocation, targeting roles in Dubai and the UAE.",
   metaDescription:

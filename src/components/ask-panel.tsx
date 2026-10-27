@@ -7,7 +7,7 @@ import { MAX_QUESTION_CHARS } from "@/lib/ask/config";
 const STARTERS = [
   "Has she worked with AWS?",
   "What has she built with React?",
-  "What does she do at Outlier AI?",
+  "What does she do at Scale AI?",
   "Does she have any backend experience?",
 ] as const;
 

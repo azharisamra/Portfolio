@@ -6,7 +6,19 @@ export interface Role {
   startDate: string;
   /** `null` means this is the current role. */
   endDate: string | null;
+  /**
+   * Earlier titles held at the same company, newest first. Used when one set
+   * of bullets covers the whole stint, as the CV lists it: the row's own dates
+   * stay the current title's, and each earlier title shows its own range.
+   */
+  earlierTitles?: readonly EarlierTitle[];
   bullets: readonly string[];
+}
+
+export interface EarlierTitle {
+  title: string;
+  startDate: string;
+  endDate: string;
 }
 
 /**
@@ -15,22 +27,34 @@ export interface Role {
  * The bullets do NOT - the brief lists no role descriptions. They are drafted
  * from your resume PDF, which the brief names as the source of truth for this
  * section. Every figure in them ("30%", "20%", "4") is yours, from that
- * document; none was invented here. The Adguru Online and Resume Jar bullets
- * follow the Oct 2026 CV word for word. Review before shipping.
+ * document; none was invented here. The Scale AI (Outlier), Adguru Online and
+ * Resume Jar entries follow the Oct 2026 CV word for word, except the last
+ * Scale AI bullet: it is kept from the earlier resume because the bio's
+ * MongoDB, MySQL and Firebase claim rests on it. Review before shipping.
  */
 export const experience: readonly Role[] = [
   {
-    company: "Outlier AI",
-    title: "Queue Manager, Operations (QMO)",
-    location: "Mumbai",
-    startDate: "Oct 2024",
+    company: "Scale AI (Outlier)",
+    title: "GenAI Code, Queue Manager",
+    location: "Contract, Remote, India",
+    startDate: "Sep 2026",
     endDate: null,
+    earlierTitles: [
+      {
+        title: "Queue Manager, Operations (QMO)",
+        startDate: "Oct 2024",
+        endDate: "Aug 2026",
+      },
+    ],
     bullets: [
-      "Write prompts and task scenarios used directly in AI model training and fine-tuning pipelines, and design the rubrics and verifiers that evaluate them.",
-      "Audit task rubrics across AI coding benchmarks for atomicity, outcome-based framing, and non-overlapping criteria.",
-      "Review verifier scripts and test suites for synthetic environments provisioned with AWS CDK, Docker and LocalStack, catching test gaps and false passes before they ship.",
-      "Write the programs a task scenario calls for, in Python and SQL, including work against MongoDB, MySQL and Firebase.",
-      "Build onboarding material for new contributors, including a training deck and a scored practice course.",
+      "Built AI agent skills in Claude Code (Python and Bash scripts, Markdown instructions and system prompts) that run as agents to automate quality checks on each task against the pass or fail threshold, working daily with LLM APIs, agentic workflows and MCP tool calling.",
+      "Wrote golden trajectories for multi-step MCP tool-calling tasks and tested multi-agent workflows end to end, checking both the task design and the grading code.",
+      "Built and debugged verifier scripts and test suites in Python, TypeScript and JavaScript that automatically grade AI coding tasks used to train and evaluate large language models (LLMs), across 7 benchmark projects (coding, MCP tool calling, Infrastructure as Code and cybersecurity).",
+      "Built cloud test environments with AWS CDK in TypeScript (ECS Fargate, DynamoDB, IAM, KMS), Docker and LocalStack so that benchmark tasks run the same way on every attempt.",
+      "Fixed tests in a 34-check Infrastructure as Code suite that wrongly penalised correct least-privilege solutions, and rebuilt a cloud benchmark task that could be passed by accident, then re-verified it across repeated runs.",
+      "Debugged code across Python, JavaScript, TypeScript and Java benchmarks, finding false passes and missing test cases and getting them fixed before release.",
+      "Reviewed deliberately vulnerable web apps (SQL injection, IDOR, path traversal) for a cybersecurity benchmark, checking each exploit path and its grading.",
+      "Wrote the programs task scenarios call for in Python and SQL, including work against MongoDB, MySQL and Firebase.",
     ],
   },
   {

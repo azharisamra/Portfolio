@@ -105,6 +105,24 @@ describe("experience", () => {
     expect(experience[0]?.endDate).toBeNull();
   });
 
+  it("ends every earlier title before the role's current title starts", () => {
+    const month = (d: string): number => {
+      const [mon, year] = d.split(" ");
+      const m = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(mon ?? "") / 3;
+      return Number(year) * 12 + m;
+    };
+    for (const role of experience) {
+      let next = month(role.startDate);
+      for (const earlier of role.earlierTitles ?? []) {
+        expect(month(earlier.endDate), earlier.title).toBeLessThanOrEqual(next);
+        expect(month(earlier.startDate), earlier.title).toBeLessThanOrEqual(
+          month(earlier.endDate),
+        );
+        next = month(earlier.startDate);
+      }
+    }
+  });
+
   it("gives every role at least one bullet", () => {
     for (const role of experience) {
       expect(role.bullets.length, role.company).toBeGreaterThan(0);

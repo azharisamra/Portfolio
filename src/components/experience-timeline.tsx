@@ -28,7 +28,28 @@ export function ExperienceTimeline() {
               <h3 className="mt-2 font-condensed text-lead uppercase">
                 {role.title}
               </h3>
-              <p className="text-meta text-ink">
+
+              {/* Earlier titles at the same company, each with its own range,
+                  stacked under the current one the way the CV lists them. The
+                  bullets below cover the whole stint. */}
+              {role.earlierTitles?.map((earlier) => (
+                <div key={earlier.title} className="mt-3">
+                  <span className="font-condensed text-label text-muted uppercase tabular-nums">
+                    {formatRange(earlier.startDate, earlier.endDate)}
+                  </span>
+                  <p className="mt-1 font-condensed text-lead text-muted uppercase">
+                    {earlier.title}
+                  </p>
+                </div>
+              ))}
+
+              <p
+                className={
+                  role.earlierTitles?.length
+                    ? "mt-1 text-meta text-ink"
+                    : "text-meta text-ink"
+                }
+              >
                 {role.company} · {role.location}
               </p>
 
