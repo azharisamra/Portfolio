@@ -197,15 +197,15 @@ describe("skills", () => {
 });
 
 describe("pinned project viewer", () => {
-  // globals.css hard-codes .work-card-1..3 / .work-shot-1..3 and a
-  // timeline-scope naming --work-1..3. A fourth featured project with a
+  // globals.css hard-codes .work-card-1..4 / .work-shot-1..4 and a
+  // timeline-scope naming --work-1..4. A fifth featured project with a
   // screenshot would render with no timeline and never appear in the panel, so
   // fail here rather than silently.
-  it("has exactly three featured projects carrying a screenshot", () => {
+  it("has exactly four featured projects carrying a screenshot", () => {
     const shots = projects.filter(
       (project) => project.featured && project.image,
     );
-    expect(shots).toHaveLength(3);
+    expect(shots).toHaveLength(4);
   });
 
   // The two variants occupy the same box and swap with display, so a size

@@ -32,8 +32,18 @@ const SHOT_SIZES = "(min-width: 1024px) 38vw, (min-width: 768px) 704px, 100vw";
  * matching `view-timeline-name` and `animation-timeline` rules live in
  * globals.css. content.test.ts asserts the count still matches.
  */
-const CARD_CLASS = ["work-card-1", "work-card-2", "work-card-3"] as const;
-const SHOT_CLASS = ["work-shot-1", "work-shot-2", "work-shot-3"] as const;
+const CARD_CLASS = [
+  "work-card-1",
+  "work-card-2",
+  "work-card-3",
+  "work-card-4",
+] as const;
+const SHOT_CLASS = [
+  "work-shot-1",
+  "work-shot-2",
+  "work-shot-3",
+  "work-shot-4",
+] as const;
 
 function ProjectEntry({ project, index }: { project: Project; index: number }) {
   const number = String(index + 1).padStart(2, "0");
