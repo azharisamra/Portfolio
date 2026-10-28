@@ -830,7 +830,7 @@
       display: grid;
       grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
       gap: 3rem;
-      timeline-scope: --work-1, --work-2, --work-3;
+      timeline-scope: --work-1, --work-2, --work-3, --work-4;
     }
 
     .work-panel {
@@ -855,7 +855,8 @@
        no seam between one shot leaving and the next arriving. Which one wins is
        just DOM order. */
     .work-shot-2,
-    .work-shot-3 {
+    .work-shot-3,
+    .work-shot-4 {
       opacity: 0;
     }
 
@@ -871,22 +872,31 @@
       view-timeline-name: --work-3;
     }
 
-    /* Per-project ranges, because the cards are not the same height (451,
-       390 and 341px at 1024 and up) and a shared percentage would land the
-       swap in a different place for each. Both are tuned so the shot reaches
-       full opacity as its card's heading arrives level with the panel, not
-       before: an earlier finish leaves you reading project two beside the
-       image for project three. */
+    .work-card-4 {
+      view-timeline-name: --work-4;
+    }
+
+    /* Per-project ranges, because the cards are not the same height and a
+       shared percentage would land the swap in a different place for each.
+       Each is tuned so the shot reaches full opacity as its card's heading
+       arrives level with the panel, not before: an earlier finish leaves you
+       reading one project beside the image for the next. */
     .work-shot-2 {
       animation: work-shot-in linear both;
       animation-timeline: --work-2;
-      animation-range: cover 48% cover 64%;
+      animation-range: cover 51% cover 67%;
     }
 
     .work-shot-3 {
       animation: work-shot-in linear both;
       animation-timeline: --work-3;
-      animation-range: cover 50% cover 66%;
+      animation-range: cover 53% cover 69%;
+    }
+
+    .work-shot-4 {
+      animation: work-shot-in linear both;
+      animation-timeline: --work-4;
+      animation-range: cover 53% cover 69%;
     }
 
     /* Clipped, not removed. The panel is aria-hidden, so this is the copy a

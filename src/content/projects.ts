@@ -42,6 +42,25 @@ export interface Project {
 
 export const projects: readonly Project[] = [
   {
+    slug: "nestwise",
+    title: "Nestwise",
+    timeframe: "2025",
+    problem:
+      "A family's spending is scattered across several phones, receipts and memories, so nobody sees the month as a whole or knows whose budget a bill comes out of.",
+    description:
+      "Shared budgeting app for families. Everyone logs spending from their own phone and entries sync instantly across the household. AI fills in an entry from a scanned receipt or a spoken note, so nobody has to type. Budgets follow who pays each bill, and savings goals are shared. Google sign-in, React on the front end, Firebase behind it, deployed on Netlify.",
+    stack: ["React", "Firebase"],
+    liveUrl: "https://neswise.netlify.app/",
+    repoUrl: "",
+    featured: true,
+    image: {
+      src: "/images/nestwise-landing.webp",
+      alt: "The Nestwise sign-in page. The headline \u201cHome money, sorted together.\u201d sits above three feature lines and a Continue with Google button. Beside it, a dark green card around the Nestwise logo shows a scanned ₹1,240 grocery entry, a ₹3,180 bill one person paid, and spending 13% lower than last month.",
+      width: 1408,
+      height: 880,
+    },
+  },
+  {
     slug: "portfolio",
     title: "This Portfolio",
     timeframe: "2026",
