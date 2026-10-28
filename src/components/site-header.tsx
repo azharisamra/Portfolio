@@ -2,19 +2,16 @@ import { profile, sectionLinks } from "@/content";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
-  // Resume only when a real URL exists, the same rule ContactSection uses, so
-  // an empty resumeUrl produces three rows rather than a dead link.
-  const footLinks = [
-    { label: "Email", href: `mailto:${profile.email}`, external: false },
-    { label: "GitHub", href: profile.githubUrl, external: true },
-    { label: "LinkedIn", href: profile.linkedinUrl, external: true },
-    ...(profile.resumeUrl
-      ? [{ label: "Resume", href: profile.resumeUrl, external: true }]
-      : []),
+  // The two things a recruiter acts on get buttons; the profiles stay links.
+  // Resume renders only when a real URL exists, so an empty resumeUrl drops
+  // the button rather than leaving one that goes nowhere.
+  const profileLinks = [
+    { label: "GitHub", href: profile.githubUrl },
+    { label: "LinkedIn", href: profile.linkedinUrl },
   ];
 
   return (
-    <header className="frame-wide border-b-2 border-ink">
+    <header id="top" className="frame-wide border-b-2 border-ink">
       {/* Pinned masthead bar. Out of flow, so the header below keeps its
           natural height at every width and no spacer is needed. At scroll 0 it
           is transparent and shows only the toggle, in the same place the toggle
@@ -91,6 +88,52 @@ export function SiteHeader() {
             short enough to sit inside the air that is already there and the
             name does not move. The addresses are spelled out in Contact. */}
         <div className="hero-foot hero-measure hero-rise hero-rise-4">
+          {/* What a recruiter needs before anything else: whether she is
+              available, and the two ways to act on it. */}
+          <p className="flex items-center gap-2 font-condensed text-label text-muted uppercase">
+            <span
+              aria-hidden="true"
+              className="inline-block size-2 bg-accent"
+            />
+            {profile.status}
+          </p>
+
+          <ul className="mt-4 mb-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+            {profile.resumeUrl ? (
+              <li>
+                <a
+                  href={profile.resumeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 bg-accent px-5 py-2.5 font-condensed text-meta text-ground uppercase no-underline"
+                >
+                  Resume
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ) : null}
+            <li>
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center border border-ink px-5 py-2.5 font-condensed text-meta uppercase no-underline"
+              >
+                Email
+              </a>
+            </li>
+            {profileLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block py-1.5 font-condensed text-label uppercase"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
           {/* A section index, not a sentence. It is the only thing that adds
               a function the first screen did not have: wayfinding on a long
               single page, and a visible signal that there is more below. The
@@ -102,7 +145,7 @@ export function SiteHeader() {
                 <li key={section.id}>
                   <a
                     href={`#${section.id}`}
-                    className="font-condensed text-label text-muted uppercase"
+                    className="inline-block py-1.5 font-condensed text-label text-muted uppercase"
                   >
                     {section.label}
                   </a>
@@ -110,22 +153,6 @@ export function SiteHeader() {
               ))}
             </ul>
           </nav>
-
-          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-1">
-            {footLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="font-condensed text-label uppercase"
-                  {...(link.external
-                    ? { target: "_blank", rel: "noreferrer" }
-                    : {})}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </header>

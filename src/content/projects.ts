@@ -55,13 +55,13 @@ export const projects: readonly Project[] = [
     featured: true,
     image: {
       src: "/images/portfolio-home-light.webp",
-      alt: "This portfolio in light mode: the name set large in condensed capitals, a role line in orange, a short bio, and rows of section and contact links at the foot of the screen.",
+      alt: "This portfolio in light mode: the name set large in condensed capitals, a role line in orange and a short bio, then an availability line above Resume and Email buttons and a row of section links.",
       width: 1408,
       height: 880,
     },
     imageDark: {
       src: "/images/portfolio-home-dark.webp",
-      alt: "This portfolio in dark mode: the name set large in condensed capitals, a role line in orange, a short bio, and rows of section and contact links at the foot of the screen.",
+      alt: "This portfolio in dark mode: the name set large in condensed capitals, a role line in orange and a short bio, then an availability line above Resume and Email buttons and a row of section links.",
       width: 1408,
       height: 880,
     },

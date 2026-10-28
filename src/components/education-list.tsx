@@ -17,7 +17,7 @@ export function EducationList() {
               <h3 className="font-condensed text-lead uppercase">
                 {item.degree}
               </h3>
-              <p className="text-meta text-accent">
+              <p className="text-meta text-ink">
                 {item.institution} · {item.location}
               </p>
             </div>

@@ -6,6 +6,7 @@ import { CertificationsList } from "@/components/certifications-list";
 import { SkillsList } from "@/components/skills-list";
 import { AskSection } from "@/components/ask-section";
 import { ContactSection } from "@/components/contact-section";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <AskSection />
         <ContactSection />
       </main>
+      <SiteFooter />
     </div>
   );
 }

@@ -903,3 +903,72 @@
     }
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Print
+
+   Every scroll-driven effect above starts from an empty state (faded out,
+   undrawn, scaled to nothing) and reaches its finished state only as the page
+   scrolls. Paper does not scroll, so a printed or saved-as-PDF copy kept those
+   start states and came out blank below the hero. Motion is switched off here
+   outright, which leaves every element in its base state: the finished one,
+   by the contract all the rules above follow.
+
+   The rest makes the page read on paper: the pinned bar and the Ask panel go
+   (both are interactive), the hero stops claiming a full screen, colours fall
+   back to the light palette whichever theme the reader picked, and a role or
+   project is not split across two pages.
+   --------------------------------------------------------------------------- */
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  :root,
+  .dark {
+    --ground: #ffffff;
+    --surface: #e7e5e4;
+    --ink: #0c0a09;
+    --muted: #57534e;
+    --accent: #c2410c;
+    --rule: #d6d3d1;
+    color-scheme: light;
+  }
+
+  .dark .shot-light {
+    display: block;
+  }
+
+  .dark .shot-dark {
+    display: none;
+  }
+
+  .masthead-bar,
+  section[aria-labelledby="ask"] {
+    display: none;
+  }
+
+  .hero-inner {
+    min-height: 0;
+  }
+
+  /* Full-width shots make every project card a page of its own. */
+  .work-card-shot {
+    width: 60% !important;
+  }
+
+  .timeline-row,
+  .rule-row,
+  .work-viewer li {
+    break-inside: avoid;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}

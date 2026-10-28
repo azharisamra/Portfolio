@@ -17,7 +17,7 @@ export function CertificationsList() {
               <h3 className="font-condensed text-lead uppercase">
                 {cert.name}
               </h3>
-              <p className="text-meta text-accent">{cert.issuer}</p>
+              <p className="text-meta text-ink">{cert.issuer}</p>
 
               {/* Only rendered once a real credential URL exists. */}
               {cert.credentialUrl ? (
