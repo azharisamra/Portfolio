@@ -55,13 +55,13 @@ export const projects: readonly Project[] = [
     featured: true,
     image: {
       src: "/images/portfolio-home-light.webp",
-      alt: "This portfolio in light mode: the name set large in condensed capitals, a role line in orange, a short bio, and a rule-separated list of contact links above the Selected Work heading.",
+      alt: "This portfolio in light mode: the name set large in condensed capitals, a role line in orange, a short bio, and rows of section and contact links at the foot of the screen.",
       width: 1408,
       height: 880,
     },
     imageDark: {
       src: "/images/portfolio-home-dark.webp",
-      alt: "This portfolio in dark mode: the name set large in condensed capitals, a role line in orange, a short bio, and a rule-separated list of contact links above the Selected Work heading.",
+      alt: "This portfolio in dark mode: the name set large in condensed capitals, a role line in orange, a short bio, and rows of section and contact links at the foot of the screen.",
       width: 1408,
       height: 880,
     },
@@ -93,7 +93,8 @@ export const projects: readonly Project[] = [
     timeframe: "Jul 2025",
     problem:
       "Athletes and sports brands depend on platforms they don't own and can't shape to present themselves the way they want.",
-    description: "Next.js and Framer Motion animated athlete site.",
+    description:
+      "Event site for a football transfer-portal athlete showcase, with a countdown to the live stream, featured athletes, the testing activities, an event timeline, the venue and partners. Built with Next.js and Framer Motion.",
     stack: ["Next.js", "Framer Motion"],
     liveUrl: "https://athletee.netlify.app/",
     repoUrl: "https://github.com/azharisamra/athletes-sports",

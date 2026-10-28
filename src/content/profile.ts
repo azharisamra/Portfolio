@@ -18,12 +18,10 @@ export interface Profile {
 }
 
 export const profile: Profile = {
-  // TODO(samra): confirm display form - full name, or just "Samra"?
   name: "Samra Hifzur Rahman",
-  // TODO(samra): headline drafted from the target roles in your brief.
   headline: "Full Stack Developer & Frontend Engineer",
   location: "Mumbai, India",
-  bio: "I work across the front end and the data side: React and TypeScript in the browser, Python and SQL against MongoDB, MySQL and Firebase. I'm currently Queue Manager, Operations at Outlier AI, and I build and ship my own projects alongside it, including the site you are reading. I'm looking for Full Stack Developer and Frontend Engineer roles in Dubai and the UAE, including teams building AI and LLM products.",
+  bio: "I work across the front end and the data side: React and TypeScript in the browser, Python and SQL against MongoDB, MySQL and Firebase. I'm currently Queue Manager for GenAI Code at Scale AI (Outlier), and I build and ship my own projects alongside it, including the site you are reading. I'm looking for Full Stack Developer and Frontend Engineer roles in Dubai and the UAE, including teams building AI and LLM products.",
   availability:
     "Available immediately with no notice period. Based in Mumbai, open to relocation, targeting roles in Dubai and the UAE.",
   metaDescription:
@@ -31,6 +29,9 @@ export const profile: Profile = {
   email: "azharisamra@gmail.com",
   linkedinUrl: "https://www.linkedin.com/in/samrahifzurrahman",
   githubUrl: "https://github.com/azharisamra",
-  // TODO(samra): real URL needed
-  resumeUrl: "",
+  // Portfolio resume: a separate version of the CV with no phone number,
+  // photo or date of birth. Regenerate it whenever its source doc changes.
+  // Served from public/, so it moves with the deploy and works on preview
+  // URLs.
+  resumeUrl: "/resume.pdf",
 };

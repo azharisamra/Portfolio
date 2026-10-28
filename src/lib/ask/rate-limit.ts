@@ -10,10 +10,13 @@ import { DAILY_LIMIT, IP_LIMIT, IP_WINDOW_MS } from "./config";
  *   - it does NOT stop a determined script, which can spread requests across
  *     instances or rotate IPs.
  *
- * The only limit that cannot be bypassed from outside is the spend limit set
- * on the Anthropic Console. Treat that as the real backstop and this as a
- * courtesy control. Swapping in a shared store (Netlify Blobs, Upstash) means
- * replacing the two Maps below and nothing else.
+ * The only limit that cannot be bypassed from outside is the quota on the
+ * Google AI Studio project that owns GOOGLE_GENERATIVE_AI_API_KEY. On the free
+ * tier Google enforces it and answers 429 once it is spent; if billing is ever
+ * enabled, cap usage on that project before relying on anything here. Treat
+ * that as the real backstop and this as a courtesy control. Swapping in a
+ * shared store (Netlify Blobs, Upstash) means replacing the two Maps below and
+ * nothing else.
  */
 
 const ipHits = new Map<string, number[]>();

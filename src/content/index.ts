@@ -5,7 +5,7 @@ export { profile } from "./profile";
 export type { Profile } from "./profile";
 
 export { experience } from "./experience";
-export type { Role } from "./experience";
+export type { Role, EarlierTitle } from "./experience";
 
 export { education } from "./education";
 export type { Education } from "./education";
