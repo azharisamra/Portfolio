@@ -9,6 +9,11 @@ export interface Profile {
    * she is available gets the real answer instead of "not listed".
    */
   availability: string;
+  /**
+   * The same hiring status in a few words, for the hero. Keep it in step with
+   * `availability`, which is the sentence the Ask panel grounds on.
+   */
+  status: string;
   /** ~155 chars, written for a recruiter scanning search results. */
   metaDescription: string;
   email: string;
@@ -24,6 +29,7 @@ export const profile: Profile = {
   bio: "I work across the front end and the data side: React and TypeScript in the browser, Python and SQL against MongoDB, MySQL and Firebase. I'm currently Queue Manager for GenAI Code at Scale AI (Outlier), and I build and ship my own projects alongside it, including the site you are reading. I'm looking for Full Stack Developer and Frontend Engineer roles in Dubai and the UAE, including teams building AI and LLM products.",
   availability:
     "Available immediately with no notice period. Based in Mumbai, open to relocation, targeting roles in Dubai and the UAE.",
+  status: "Available immediately · Relocating to the UAE",
   metaDescription:
     "Full Stack Developer and Frontend Engineer working in React, TypeScript, Python and AWS. Based in Mumbai, looking for roles in Dubai and the UAE.",
   email: "azharisamra@gmail.com",

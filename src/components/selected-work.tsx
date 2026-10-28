@@ -95,7 +95,7 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
               href={project.repoUrl}
               target="_blank"
               rel="noreferrer"
-              className="font-condensed text-label text-muted uppercase"
+              className="inline-block py-1.5 font-condensed text-label text-muted uppercase"
             >
               Source code
             </a>

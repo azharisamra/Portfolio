@@ -19,7 +19,7 @@ export function ContactSection() {
       <div className="reveal-on-scroll mt-6">
         <a
           href={`mailto:${profile.email}`}
-          className="inline-flex items-center gap-2 bg-accent px-6 py-3 font-condensed text-lead text-ground uppercase no-underline"
+          className="inline-flex items-center gap-2 bg-accent px-6 py-3 font-condensed text-lead text-ground no-underline"
         >
           {profile.email}
           <span aria-hidden="true">→</span>
